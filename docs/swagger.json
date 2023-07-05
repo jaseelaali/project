@@ -1,0 +1,1342 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "\u003cadd description here\u003e",
+        "title": "ORCHID_FOOTWARES",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:9080",
+    "basePath": "/",
+    "paths": {
+        "/admin/addcategory": {
+            "post": {
+                "description": "admin can add categories here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "category management"
+                ],
+                "summary": "add category",
+                "operationId": "add-category",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/addcoupen": {
+            "post": {
+                "description": "Admin can add coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "coupen management"
+                ],
+                "summary": "ADD COUPEN",
+                "operationId": "add-coupen",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the coupen",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/addsubcategory": {
+            "post": {
+                "description": "admin can add subcategories here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "subcategory management"
+                ],
+                "summary": "add subcategory",
+                "operationId": "add-subcategory",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/block": {
+            "post": {
+                "description": "admin can block user here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "user management"
+                ],
+                "summary": "BLOCK USER",
+                "operationId": "block user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/deletecategory": {
+            "delete": {
+                "description": "admin can delete category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "category management"
+                ],
+                "summary": "Delete Category",
+                "operationId": "delete-category",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/deleteproduct": {
+            "delete": {
+                "description": "admin can delete product here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "product management"
+                ],
+                "summary": "DELETE PRODUCT",
+                "operationId": "delete-product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/deletesubcategory": {
+            "delete": {
+                "description": "admin can delete subcategory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "subcategory management"
+                ],
+                "summary": "Delete SubCategory",
+                "operationId": "delete-subcategory",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/editcategory": {
+            "patch": {
+                "description": "admin can edit category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "category management"
+                ],
+                "summary": "Edit Category",
+                "operationId": "Edit-category",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/editproduct": {
+            "patch": {
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/editsubcategory": {
+            "patch": {
+                "description": "admin can edit sub category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "subcategory management"
+                ],
+                "summary": "Edit SUb Category",
+                "operationId": "Edit-subcategory",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/listcoupen": {
+            "get": {
+                "description": "Admin can list coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "coupen management"
+                ],
+                "summary": "LIST COUPEN",
+                "operationId": "list-coupen",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/returnstatus": {
+            "post": {
+                "description": "admin can see delivery status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "delivery status"
+                ],
+                "summary": "RETURN STATUS",
+                "operationId": "return status",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/salesreport": {
+            "get": {
+                "description": "Admin can download sales report from here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "sales report"
+                ],
+                "summary": "sales report",
+                "operationId": "sales report",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/superadminlogin": {
+            "post": {
+                "description": "Admin can sign up with email and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "home"
+                ],
+                "summary": "Admin Login",
+                "operationId": "Admin-login",
+                "parameters": [
+                    {
+                        "description": "Login credentials",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Admin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/unblock": {
+            "post": {
+                "description": "admin can unblock user here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "user management"
+                ],
+                "summary": "UNBLOCK USER",
+                "operationId": "unblock user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/view": {
+            "get": {
+                "description": "admin can view user here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "user management"
+                ],
+                "summary": "VIEW USER",
+                "operationId": "view-user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/viewblockedusers": {
+            "get": {
+                "description": "admin can view blocked user here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "user management"
+                ],
+                "summary": "VIEW BLOCKED USER",
+                "operationId": "view-blocked user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/viewcategory": {
+            "get": {
+                "description": "admin can view category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "category management"
+                ],
+                "summary": "viewcategory",
+                "operationId": "view-category",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/viewproducts": {
+            "get": {
+                "description": "admin can view product here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "product management"
+                ],
+                "summary": "VIEW PRODUCT",
+                "operationId": "view-product",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/viewspecificuser": {
+            "get": {
+                "description": "admin can view specific user here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "user management"
+                ],
+                "summary": "VIEW SPECIFIC USER",
+                "operationId": "view-specific user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/viewsubcategory": {
+            "get": {
+                "description": "admin can view subcategory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "subcategory management"
+                ],
+                "summary": "viewsubcategory",
+                "operationId": "view-subcategory",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/viewunblockedusers": {
+            "get": {
+                "description": "admin can view active user here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "user management"
+                ],
+                "summary": "VIEW ACTIVE USER",
+                "operationId": "view-active user",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/aboutme": {
+            "get": {
+                "description": "user can view profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "profile management"
+                ],
+                "summary": "VIEW  PROFILE",
+                "operationId": "view-profile",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/addaddress": {
+            "post": {
+                "description": "user can add their address here ...",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "Add Address",
+                "operationId": "add_address",
+                "parameters": [
+                    {
+                        "description": "enter address",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Address"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/addcart": {
+            "post": {
+                "description": "User can add items to their cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "cart management"
+                ],
+                "summary": "Add Cart",
+                "operationId": "add-cart",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Product_ID",
+                        "name": "product_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Product_Quantity",
+                        "name": "product_quantity",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/addorder": {
+            "post": {
+                "description": "user can add order here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "order management"
+                ],
+                "summary": "ADD ORDER",
+                "operationId": "add-order",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/applycoupen": {
+            "post": {
+                "description": "user can apply coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "coupen"
+                ],
+                "summary": "APPLY COUPEN",
+                "operationId": "applycoupen",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/cancelorder": {
+            "delete": {
+                "description": "user can cancel order here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "order management"
+                ],
+                "summary": "CANCEL ORDER",
+                "operationId": "cancel-order",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/changepassword": {
+            "post": {
+                "description": "User can change password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "change password"
+                ],
+                "summary": "changepassword",
+                "operationId": "change-password",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/deleteaddress": {
+            "delete": {
+                "description": "Delete address of a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "Delete address",
+                "operationId": "delete-address",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID ",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/deleteitem": {
+            "delete": {
+                "description": "User delete cart items",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "cart management"
+                ],
+                "summary": "delete-cart items",
+                "operationId": "delete-cart",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "productId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "quantity",
+                        "name": "quantity",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/deleteprofile": {
+            "delete": {
+                "description": "user can delete profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "profile management"
+                ],
+                "summary": "DELETE  PROFILE",
+                "operationId": "delete-profile",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/editaddress": {
+            "patch": {
+                "description": "User can change their address here ...",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "Edit Address",
+                "operationId": "edit-address",
+                "parameters": [
+                    {
+                        "description": "information",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Address"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/editmyprofile": {
+            "patch": {
+                "description": "user can edit profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "profile management"
+                ],
+                "summary": "EDIT  PROFILE",
+                "operationId": "edit-profile",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/listcoupens": {
+            "get": {
+                "description": "user can list coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "coupen"
+                ],
+                "summary": "LIST COUPEN",
+                "operationId": "listcoupen",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/listwishlist": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/loginuser": {
+            "post": {
+                "description": "User can login with email and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "Home"
+                ],
+                "summary": "User Login",
+                "operationId": "user-login",
+                "parameters": [
+                    {
+                        "description": "user credentials for logging in",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/mywallet": {
+            "get": {
+                "description": "Use can check the amount in wallet",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "my wallet"
+                ],
+                "summary": "My wallet",
+                "operationId": "wallet",
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/payment-success": {
+            "post": {
+                "description": "razor pay",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "payment manangement"
+                ],
+                "summary": "RAZOR PAY",
+                "operationId": "razor-pay-success",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/razorpay": {
+            "get": {
+                "description": "razor pay",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "payment manangement"
+                ],
+                "summary": "RAZOR PAY",
+                "operationId": "razor-pay",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/removewishlist": {
+            "delete": {
+                "description": "user can delete items of their wishlist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "wishlist"
+                ],
+                "summary": "REMOVE WISHLIST",
+                "operationId": "removewishlist",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/returnproduct": {
+            "post": {
+                "description": "user can return product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "return product"
+                ],
+                "summary": "RETURN PRODUCT",
+                "operationId": "return product",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/showorder": {
+            "get": {
+                "description": "user can view order here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "order management"
+                ],
+                "summary": "SHOW ORDER",
+                "operationId": "show-order",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "description": "User can sign up with email and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "Home"
+                ],
+                "summary": "User Signup",
+                "operationId": "user-signup",
+                "parameters": [
+                    {
+                        "description": "user credentials for creating new account",
+                        "name": "newUser",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/verifyotp": {
+            "post": {
+                "description": "verify otp",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "change password"
+                ],
+                "summary": "verify otp",
+                "operationId": "verify-otp",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "newpassword",
+                        "name": "verfy",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/viewaddress": {
+            "get": {
+                "description": "User can view their address",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "viewaddress",
+                "operationId": "view-address",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/viewcart": {
+            "get": {
+                "description": "User can view their cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "cart management"
+                ],
+                "summary": "View Cart",
+                "operationId": "view-cart",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Items per page",
+                        "name": "perpage",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/viewproduct": {
+            "get": {
+                "description": "user can view product here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "products"
+                ],
+                "summary": "viewproduct",
+                "operationId": "vieproduct",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Address": {
+            "type": "object"
+        },
+        "models.Admin": {
+            "type": "object"
+        },
+        "models.Products": {
+            "type": "object"
+        },
+        "models.User": {
+            "type": "object"
+        }
+    }
+}
