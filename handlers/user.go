@@ -14,6 +14,13 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type UserSignupResponse struct {
+	User_Name    string
+	Email        string
+	Phone_Number string
+	Password     string
+}
+
 // UserSignup
 // @Summary User Signup
 // @ID user-signup
@@ -22,7 +29,7 @@ import (
 // @Tags Home
 // @Accept json
 // @Produce json
-// @Param newUser body models.User true "user credentials for creating new account"
+// @Param newUser body UserSignupResponse true "user credentials for creating new account"
 // @Success 200
 // @Failure 400
 // @Router /user/signup [post]
@@ -47,15 +54,20 @@ func UserSignUp(r *gin.Context) {
 	r.JSON(200, gin.H{"success": "Created new user successfully "})
 }
 
+type UserLoginResponse struct {
+	Email    string
+	Password string
+}
+
 // UserLogin
-// @Summary User Login
-// @ID user-login
-// @Description User can login with email and password
+// @Summary User LOGIN
+// @ID user-LOGIN
+// @Description User can login here
 // @Tags User
 // @Tags Home
 // @Accept json
 // @Produce json
-// @Param user body models.User{} true "user credentials for logging in"
+// @Param newUser body UserLoginResponse{} true "user credentials for creating new account"
 // @Success 200
 // @Failure 400
 // @Router /user/loginuser [post]
@@ -118,6 +130,8 @@ func UserLogin(r *gin.Context) {
 // @Tags user management
 // @Accept json
 // @Produce json
+// @Param page query integer true "page"
+// @Param perpage query integer  true "perpage"
 // @Success 200
 // @Failure 400
 // @Router /admin/view [get]
@@ -160,9 +174,13 @@ func ViewUser(r *gin.Context) {
 // @Tags user management
 // @Accept json
 // @Produce json
+// @Param id query integer false "Id"
+// @Param User_Name query string false "User_Name"
+// @Param Email query string false "Email"
+// @Param Phone_Number query string false "Phone_Number"
 // @Success 200
 // @Failure 400
-// @Router /admin/viewspecificuser [get]
+// @Router /admin/speacificuser [get]
 func SpeacificUser(r *gin.Context) {
 	var body struct {
 		Id           int    `json:"id"`
@@ -227,8 +245,7 @@ func SpeacificUser(r *gin.Context) {
 
 }
 
-//	BLOCK USER
-//
+// BlockUser
 // @Summary BLOCK USER
 // @ID block user
 // @Description admin can block user here
@@ -236,6 +253,7 @@ func SpeacificUser(r *gin.Context) {
 // @Tags user management
 // @Accept json
 // @Produce json
+// @Param id query string  true "id"
 // @Success 200
 // @Failure 400
 // @Router /admin/block [post]
@@ -249,21 +267,21 @@ func BlockUser(r *gin.Context) {
 	r.JSON(200, gin.H{"success": "Blocked user successfully"})
 }
 
-//	UNBLOCK USER
-//
-// @Summary UNBLOCK USER
+// UnBlockUser
+// @Summary UnBLOCK USER
 // @ID unblock user
 // @Description admin can unblock user here
 // @Tags Admin
 // @Tags user management
 // @Accept json
 // @Produce json
+// @Param id query string  true "id"
 // @Success 200
 // @Failure 400
 // @Router /admin/unblock [post]
 func UnBlockUser(r *gin.Context) {
 	ID, _ := strconv.Atoi(r.Query("id"))
-	err := repository.UnBlockUser(ID)
+	err := repository.UnBlocUser(ID)
 	if err != nil {
 		r.JSON(400, gin.H{"error": err.Error()})
 	} else {
@@ -271,22 +289,26 @@ func UnBlockUser(r *gin.Context) {
 	}
 }
 
-// VIEW BLOCKED USER
-// @Summary VIEW BLOCKED USER
-// @ID view-blocked user
-// @Description admin can view blocked user here
+type BlockedUsersResponse struct {
+	Page    int
+	Perpage int
+}
+
+// BlockedUsers
+// @Summary Get blocked users
+// @ID blockedusers
+// @Description Retrieve a list of blocked users with pagination
+// @Security BearerAuth
 // @Tags Admin
 // @Tags user management
 // @Accept json
 // @Produce json
+// @Param Body body BlockedUsersResponse{} true "Pagination details"
 // @Success 200
 // @Failure 400
 // @Router /admin/viewblockedusers [get]
 func BlockedUsers(r *gin.Context) {
-	var Body struct {
-		Page    int `json:"page" binding:"required"`
-		Perpage int `json:"perpage" binding:"required"`
-	}
+	Body:=BlockedUsersResponse{}
 	err := r.ShouldBind(&Body)
 	if err != nil {
 		r.JSON(400, gin.H{
@@ -307,21 +329,10 @@ func BlockedUsers(r *gin.Context) {
 
 }
 
-// VIEW ACTIVE USER
-// @Summary VIEW ACTIVE USER
-// @ID view-active user
-// @Description admin can view active user here
-// @Tags Admin
-// @Tags user management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/viewunblockedusers [get]
 func ActiveUsers(r *gin.Context) {
 	var Body struct {
-		Page    int `json:"page" binding:"required"`
-		Perpage int `json:"perpage" binding:"required"`
+		Page    int `json:"page"`
+		Perpage int `json:"perpage"`
 	}
 	err := r.ShouldBind(&Body)
 	if err != nil {

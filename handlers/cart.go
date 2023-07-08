@@ -9,19 +9,6 @@ import (
 	//"github.com/go-playground/validator/v10/translations/id"
 )
 
-// AddCart
-// @Summary Add Cart
-// @ID add-cart
-// @Description User can add items to their cart
-// @Tags User
-// @Tags cart management
-// @Accept json
-// @Produce json
-// @Param product_id formData integer true "Product_ID"
-// @Param product_quantity formData integer true "Product_Quantity"
-// @Success 200
-// @Failure 400
-// @Router /user/addcart [post]
 func AddCart(r *gin.Context) {
 	product_id, err := strconv.Atoi(r.Query("product_id"))
 	if err != nil {
@@ -106,8 +93,8 @@ func AddCart(r *gin.Context) {
 // @Tags cart management
 // @Accept json
 // @Produce json
-// @Param page query integer true "Page number"
-// @Param perpage query integer true "Items per page"
+// @Param page query string true "Page "
+// @Param perpage query string true "perpage"
 // @Success 200
 // @Failure 400
 // @Router /user/viewcart [get]
@@ -149,8 +136,8 @@ func ViewCart(r *gin.Context) {
 // @Tags cart management
 // @Accept json
 // @Produce json
-// @Param productId formData integer true "id"
-// @Param quantity formData integer true "quantity"
+// @Param productId query string true "id"
+// @Param quantity query string true "quantity"
 // @Success 200
 // @Failure 400
 // @Router /user/deleteitem [delete]

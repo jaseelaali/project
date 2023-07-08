@@ -11,25 +11,21 @@ import (
 	_ "gorm.io/gorm"
 )
 
-// ADDADDRESS
-// @Summary Add Address
-// @ID add_address
-// @Description user can add their address here ...
-// @Tags User
-// @Tags address management
-// @Accept json
-// @Produce json
-// @Param address body models.Address true "enter address"
-// @Success 200
-// @Failure 400
-// @Router /user/addaddress [post]
+type AddAddressResponse struct {
+	House_name string
+	Place      string
+	District   string
+	State      string
+	Pin_Number int
+}
+
 func Address(r *gin.Context) {
 	var Body struct {
-		House_name string `json:"house_name" binding:"required"`
-		Place      string `json:"place" binding:"required"`
-		District   string `json:"district" binding:"required"`
-		State      string `json:"state" binding:"required"`
-		Pin_Number int    `json:"pin" binding:"required"`
+		House_name string
+		Place      string
+		District   string
+		State      string
+		Pin_Number int
 	}
 	temp := fmt.Sprint(r.Get("user_id"))
 	id := strings.Split(temp, " ")
@@ -62,18 +58,14 @@ func Address(r *gin.Context) {
 	})
 }
 
-// EDIT ADDRESS
-// @Summary Edit Address
-// @ID edit-address
-// @Description  User can change their address here ...
-// @Tags User
-// @Tags address management
-// @Accept json
-// @Produce json
-// @Param address body models.Address true "information"
-// @Success 200
-// @Failure 400
-// @Router /user/editaddress [patch]
+type EditAddressResponse struct {
+	House_name string
+	Place      string
+	District   string
+	State      string
+	Pin_Number int
+}
+
 func EditAddress(r *gin.Context) {
 	Id := repository.GetId(r)
 	var body struct {
@@ -142,18 +134,6 @@ func EditAddress(r *gin.Context) {
 
 }
 
-// DeleteAddress
-// @Summary Delete address
-// @ID delete-address
-// @Description Delete address of a user
-// @Tags User
-// @Tags address management
-// @Accept json
-// @Produce json
-// @Param id query string true "ID "
-// @Success 200
-// @Failure 400
-// @Router /user/deleteaddress [delete]
 func DeleteAddress(r *gin.Context) {
 	User_Id := repository.GetId(r)
 	var Body struct {
@@ -179,17 +159,7 @@ func DeleteAddress(r *gin.Context) {
 
 }
 
-// ViewAddress
-// @Summary viewaddress
-// @ID view-address
-// @Description User can view their address
-// @Tags User
-// @Tags address management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /user/viewaddress [get]
+
 func ViewAddress(r *gin.Context) {
 	user_id := repository.GetId(r)
 	address, err := repository.Viewaddress(user_id)

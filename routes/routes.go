@@ -19,22 +19,22 @@ func User(r *gin.Engine) {
 		user.POST("/loginuser", handlers.UserLogin)
 		//profile
 		user.GET("/aboutme", middleware.RequiredAuthenticationUser, handlers.Profile)
-		user.PATCH("/editmyprofile", middleware.RequiredAuthenticationUser, handlers.EditProfile)
-		user.DELETE("/deleteprofile", middleware.RequiredAuthenticationUser, handlers.DeleteProfile)
+		user.PATCH("/editmyprofile", middleware.RequiredAuthenticationUser, handlers.EditProfile) //////
+		user.DELETE("/deleteprofile", middleware.RequiredAuthenticationUser, handlers.DeleteProfile)/////
 		// cart management
-		user.POST("/addcart", middleware.RequiredAuthenticationUser, handlers.AddCart)
+		user.POST("/addcart", middleware.RequiredAuthenticationUser, handlers.AddCart) ////
 		user.GET("/viewcart", middleware.RequiredAuthenticationUser, handlers.ViewCart)
 		user.DELETE("/deleteitem", middleware.RequiredAuthenticationUser, handlers.DeleteItem)
 		//product
 		user.GET("/viewproduct", middleware.RequiredAuthenticationUser, handlers.ViewProduct)
 		//change password
 		user.POST("/changepassword", middleware.RequiredAuthenticationUser, handlers.ChangePassword)
-		user.POST("/verifyotp", middleware.RequiredAuthenticationUser, handlers.VerifyOtp)
+		user.POST("/verifyotp", middleware.RequiredAuthenticationUser, handlers.VerifyOtp)////
 		// address
-		user.POST("/addaddress", middleware.RequiredAuthenticationUser, handlers.Address)
-		user.PATCH("/editaddress", middleware.RequiredAuthenticationUser, handlers.EditAddress)
-		user.DELETE("/deleteaddress", middleware.RequiredAuthenticationUser, handlers.DeleteAddress)
-		user.GET("/viewaddress", middleware.RequiredAuthenticationUser, handlers.ViewAddress)
+		user.POST("/addaddress", middleware.RequiredAuthenticationUser, handlers.Address)///
+		user.PATCH("/editaddress", middleware.RequiredAuthenticationUser, handlers.EditAddress)//
+		user.DELETE("/deleteaddress", middleware.RequiredAuthenticationUser, handlers.DeleteAddress)///
+		user.GET("/viewaddress", middleware.RequiredAuthenticationUser, handlers.ViewAddress)///
 		// order management
 		user.POST("/addorder", middleware.RequiredAuthenticationUser, handlers.AddOrder)
 		user.GET("/showorder", middleware.RequiredAuthenticationUser, handlers.ShowOrder)
@@ -69,7 +69,7 @@ func Admin(r *gin.Engine) {
 		//admin.POST("/adminlogin", handlers.AdminLogin)
 
 		//user management
-		admin.GET("/view", middleware.RequiredAuthenticationAdmin, handlers.ViewUser)					
+		admin.GET("/view", middleware.RequiredAuthenticationAdmin, handlers.ViewUser)
 		admin.GET("/speacificuser", middleware.RequiredAuthenticationAdmin, handlers.SpeacificUser)
 		admin.POST("/block", middleware.RequiredAuthenticationAdmin, handlers.BlockUser)
 		admin.POST("/unblock", middleware.RequiredAuthenticationAdmin, handlers.UnBlockUser)

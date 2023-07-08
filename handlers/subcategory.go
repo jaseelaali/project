@@ -6,18 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-// ADDSUBCATEGORY
-// @Summary add subcategory
-// @ID add-subcategory
-// @Description admin can add subcategories here
-// @Tags Admin
-//@Tags subcategory management
-// @Accept json
-// @Produce json
-//param admin body models.SubCategory{} true"add product"
-// @Success 200
-// @Failure 400
-// @Router /admin/addsubcategory [post]
+
 func AddSubCategory(r *gin.Context) {
 	Subcategory := models.SubCategory{}
 	

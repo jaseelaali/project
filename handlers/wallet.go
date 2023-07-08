@@ -7,16 +7,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// MYWALLET
-// @summary My wallet
-// @ID wallet
-// @Description  	Use can check the amount in wallet
+// My Wallet
+// @Summary  My Wallet
+// @ID  My_Wallet
+// @Description user can view wallet
 // @Tags User
-//@Tags my wallet
+// @Tags  My Wallet
+// @Accept json
 // @Produce json
-// @Sucess 200
+// @Success 200
 // @Failure 400
 // @Router /user/mywallet [get]
+
 func MyWallet(r *gin.Context) {
 	user_id := repository.GetId(r)
 	data, err := repository.Mywallet(user_id)

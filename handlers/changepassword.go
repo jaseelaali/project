@@ -19,12 +19,13 @@ import (
 
 var OTP int
 var twilio = gotwilio.NewTwilioClient("AC3037e122f46a35ae97b5a48f7413be56", "0bc43f0b4e4a492d46e26bf093c0fc40")
+
 // change password
-// @Summary changepassword
+// @Summary Change password
 // @ID change-password
 // @Description User can change password
 // @Tags User
-//@Tags change password
+// @Tags Change password
 // @Accept json
 // @Produce json
 // @Success 200
@@ -71,23 +72,20 @@ func generateOTP() int {
 	fmt.Println(otp)
 	return otp
 }
-// verify otp
-// @Summary verify otp
-// @ID verify-otp
-// @Description verify otp
-// @Tags User
-//@Tags change password
-// @Accept json
-// @Produce json
-// @Param verfy formData string true "newpassword"
-// @Success 200
-// @Failure 400
-// @Router /user/verifyotp [post]
+
+type VerifyOTPResponse struct {
+	Otp              int
+	New_Password     string
+	Confirm_Password string
+}
+
+
+
 func VerifyOtp(r *gin.Context) {
 	var body struct {
-		Otp              int    `json:"otp" binding:"required"`
-		New_Password     string `json:"new_password" binding:"required"`
-		Confirm_Password string `json:"confirm_password" binding:"required"`
+		Otp              int
+		New_Password     string
+		Confirm_Password string
 	}
 	err := r.Bind(&body)
 	if err != nil {

@@ -6,12 +6,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
+
 // PROFILE
 // @Summary VIEW  PROFILE
 // @ID view-profile
 // @Description user can view profile
-//@Tags User
-//@Tags profile management
+// @Tags User
+// @Tags profile management
 // @Accept json
 // @Produce json
 // @Success 200
@@ -31,17 +32,7 @@ func Profile(r *gin.Context) {
 	})
 
 }
-//  EDIT PROFILE
-// @Summary EDIT  PROFILE
-// @ID edit-profile
-// @Description user can edit profile
-//@Tags User
-//@Tags profile management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /user/editmyprofile [patch]
+
 func EditProfile(r *gin.Context) {
 	user_id := repository.GetId(r)
 	body := models.UserProfile{}
@@ -71,7 +62,8 @@ func EditProfile(r *gin.Context) {
 		"message": "profile updated",
 	})
 }
-//DELETE PROFILE
+
+//DeleteProfile
 // @Summary DELETE  PROFILE
 // @ID delete-profile
 // @Description user can delete profile
@@ -82,6 +74,7 @@ func EditProfile(r *gin.Context) {
 // @Success 200
 // @Failure 400
 // @Router /user/deleteprofile [delete]
+
 func DeleteProfile(r *gin.Context) {
 	user_id := repository.GetId(r)
 	err := repository.Deleteprofile(user_id)

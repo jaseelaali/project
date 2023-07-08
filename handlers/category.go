@@ -8,18 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ADDCATEGORY
-// @Summary add category
-// @ID add-category
-// @Description admin can add categories here
-// @Tags Admin
-// @Tags category management
-// @Accept json
-// @Produce json
-// param admin body models.Category{} true"add product"
-// @Success 200
-// @Failure 400
-// @Router /admin/addcategory [post]
+
 func AddCategory(r *gin.Context) {
 	category := models.Category{}
 	err := r.Bind(&category)
@@ -41,17 +30,7 @@ func AddCategory(r *gin.Context) {
 	})
 }
 
-// EditCategory
-// @Summary Edit Category
-// @ID Edit-category
-// @Description admin can edit category
-// @Tags Admin
-// @Tags category management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/editcategory [patch]
+
 func EditCategory(r *gin.Context) {
 	id, err := strconv.Atoi(r.Query("id"))
 	if err != nil {
@@ -80,17 +59,7 @@ func EditCategory(r *gin.Context) {
 
 }
 
-// Delete Category
-// @Summary Delete Category
-// @ID delete-category
-// @Description admin can delete category
-// @Tags Admin
-// @Tags category management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/deletecategory [delete]
+
 func DeleteCategory(r *gin.Context) {
 	id, err := strconv.Atoi(r.Query("id"))
 	if err != nil {
@@ -111,17 +80,7 @@ func DeleteCategory(r *gin.Context) {
 	})
 }
 
-// View Category
-// @Summary viewcategory
-// @ID view-category
-// @Description admin can view category
-// @Tags Admin
-// @Tags category management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/viewcategory [get]
+
 func ViewCategory(r *gin.Context) {
 
 	Category, err := repository.Viewcategory()
@@ -137,17 +96,7 @@ func ViewCategory(r *gin.Context) {
 
 }
 
-// EditSubCategory
-// @Summary Edit SUb Category
-// @ID Edit-subcategory
-// @Description admin can edit sub category
-// @Tags Admin
-// @Tags subcategory management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/editsubcategory [patch]
+
 func EditSubCategory(r *gin.Context) {
 	id, err := strconv.Atoi(r.Query("id"))
 	if err != nil {
@@ -176,17 +125,7 @@ func EditSubCategory(r *gin.Context) {
 
 }
 
-// Delete SubCategory
-// @Summary Delete SubCategory
-// @ID delete-subcategory
-// @Description admin can delete subcategory
-// @Tags Admin
-// @Tags subcategory management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/deletesubcategory [delete]
+
 func DeleteSubCategory(r *gin.Context) {
 	id, err := strconv.Atoi(r.Query("id"))
 	if err != nil {
@@ -207,17 +146,7 @@ func DeleteSubCategory(r *gin.Context) {
 	})
 }
 
-// View SubCategory
-// @Summary viewsubcategory
-// @ID view-subcategory
-// @Description admin can view subcategory
-// @Tags Admin
-// @Tags subcategory management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/viewsubcategory [get]
+
 func ViewSubCategory(r *gin.Context) {
 	SubCategory, err := repository.ViewSubcategory()
 	if err != nil {

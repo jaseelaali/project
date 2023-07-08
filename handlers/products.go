@@ -9,17 +9,27 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type ProductsResponse struct {
+	Product_Name   string `json:"product_name" binding:"required"`
+	Product_Colour string `json:"product_colour" binding:"required"`
+	Product_Size   int    `json:"product_size" binding:"required"`
+	Product_Brand  string `json:"product_brand" binding:"required"`
+	Product_Price  int
+	Stock          int
+}
+
 // AddProducts
 // @Summary Add Products
+// @ID add-product
 // @Description Add new products
 // @Tags Admin
 // @Tags product management
 // @Accept json
 // @Produce json
-// @Param requestBody body models.Products true "Product details"
+// @Param requestBody body ProductsResponse true "Product details"
 // @Success 200
 // @Failure 400
-// Router /admin/addproduct [post]
+// @Router /admin/addproduct [post]
 func AddProducts(r *gin.Context) {
 	product := models.Products{}
 	err := r.Bind(&product)
@@ -48,9 +58,12 @@ func AddProducts(r *gin.Context) {
 // @Tags product management
 // @Accept json
 // @Produce json
-// @Param product_id query string true "product_id"
-// @Param product_id query string true "product_id"
-
+// @Param product_id query integer true "product_id"
+// @Param product_name query string false "product name"
+// @Param product_colour query string false "product colour"
+// @Param product_size query integer false "product size"
+// @Param product_price query integer false "product price"
+// @Param stock query integer false "stock"
 // @Success 200
 // @Failure 400
 // @Router /admin/editproduct [patch]
@@ -141,7 +154,7 @@ func EditProducts(r *gin.Context) {
 // @Param id query string true "id"
 // @Success 200
 // @Failure 400
-// @Router /admin/deleteproduct [delete]
+// @Router /admin/deleteproducts [delete]
 func DeleteProducts(r *gin.Context) {
 	id, err := strconv.Atoi(r.Query("id"))
 
@@ -166,6 +179,8 @@ func DeleteProducts(r *gin.Context) {
 // @Tags product management
 // @Accept json
 // @Produce json
+// @Param page query integer true "page"
+// @Param perpage query integer true "perpage"
 // @Success 200
 // @Failure 400
 // @Router /admin/viewproducts [get]
@@ -206,6 +221,8 @@ func ViewProducts(r *gin.Context) {
 // @Tags products
 // @Accept json
 // @Produce json
+// @Param page query integer true "page"
+// @Param perpage query integer true "perpage"
 // @Success 200
 // @Failure 400
 // @Router /user/viewproduct [get]

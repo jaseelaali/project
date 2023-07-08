@@ -24,9 +24,9 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/admin/addcategory": {
+        "/admin/addproduct": {
             "post": {
-                "description": "admin can add categories here",
+                "description": "Add new products",
                 "consumes": [
                     "application/json"
                 ],
@@ -35,69 +35,21 @@ const docTemplate = `{
                 ],
                 "tags": [
                     "Admin",
-                    "category management"
+                    "product management"
                 ],
-                "summary": "add category",
-                "operationId": "add-category",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/addcoupen": {
-            "post": {
-                "description": "Admin can add coupen here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "coupen management"
-                ],
-                "summary": "ADD COUPEN",
-                "operationId": "add-coupen",
+                "summary": "Add Products",
+                "operationId": "add-product",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "name of the coupen",
-                        "name": "code",
-                        "in": "query",
-                        "required": true
+                        "description": "Product details",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ProductsResponse"
+                        }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/addsubcategory": {
-            "post": {
-                "description": "admin can add subcategories here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "subcategory management"
-                ],
-                "summary": "add subcategory",
-                "operationId": "add-subcategory",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -123,6 +75,15 @@ const docTemplate = `{
                 ],
                 "summary": "BLOCK USER",
                 "operationId": "block user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -133,32 +94,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin/deletecategory": {
-            "delete": {
-                "description": "admin can delete category",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "category management"
-                ],
-                "summary": "Delete Category",
-                "operationId": "delete-category",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/deleteproduct": {
+        "/admin/deleteproducts": {
             "delete": {
                 "description": "admin can delete product here",
                 "consumes": [
@@ -192,71 +128,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin/deletesubcategory": {
-            "delete": {
-                "description": "admin can delete subcategory",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "subcategory management"
-                ],
-                "summary": "Delete SubCategory",
-                "operationId": "delete-subcategory",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/editcategory": {
-            "patch": {
-                "description": "admin can edit category",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "category management"
-                ],
-                "summary": "Edit Category",
-                "operationId": "Edit-category",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
         "/admin/editproduct": {
             "patch": {
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/editsubcategory": {
-            "patch": {
-                "description": "admin can edit sub category",
+                "description": "admin can edit product here",
                 "consumes": [
                     "application/json"
                 ],
@@ -265,10 +139,49 @@ const docTemplate = `{
                 ],
                 "tags": [
                     "Admin",
-                    "subcategory management"
+                    "product management"
                 ],
-                "summary": "Edit SUb Category",
-                "operationId": "Edit-subcategory",
+                "summary": "EDIT PRODUCT",
+                "operationId": "edit-product",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "product_id",
+                        "name": "product_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "product name",
+                        "name": "product_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "product colour",
+                        "name": "product_colour",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "product size",
+                        "name": "product_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "product price",
+                        "name": "product_price",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "stock",
+                        "name": "stock",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -279,9 +192,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin/listcoupen": {
+        "/admin/speacificuser": {
             "get": {
-                "description": "Admin can list coupen here",
+                "description": "admin can view specific user here",
                 "consumes": [
                     "application/json"
                 ],
@@ -290,60 +203,36 @@ const docTemplate = `{
                 ],
                 "tags": [
                     "Admin",
-                    "coupen management"
+                    "user management"
                 ],
-                "summary": "LIST COUPEN",
-                "operationId": "list-coupen",
-                "responses": {
-                    "200": {
-                        "description": "OK"
+                "summary": "VIEW SPECIFIC USER",
+                "operationId": "view-specific user",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Id",
+                        "name": "id",
+                        "in": "query"
                     },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/returnstatus": {
-            "post": {
-                "description": "admin can see delivery status",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "delivery status"
-                ],
-                "summary": "RETURN STATUS",
-                "operationId": "return status",
-                "responses": {
-                    "200": {
-                        "description": "OK"
+                    {
+                        "type": "string",
+                        "description": "User_Name",
+                        "name": "User_Name",
+                        "in": "query"
                     },
-                    "400": {
-                        "description": "Bad Request"
+                    {
+                        "type": "string",
+                        "description": "Email",
+                        "name": "Email",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Phone_Number",
+                        "name": "Phone_Number",
+                        "in": "query"
                     }
-                }
-            }
-        },
-        "/admin/salesreport": {
-            "get": {
-                "description": "Admin can download sales report from here",
-                "consumes": [
-                    "application/json"
                 ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "sales report"
-                ],
-                "summary": "sales report",
-                "operationId": "sales report",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -376,7 +265,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Admin"
+                            "$ref": "#/definitions/handlers.AdminLoginResponse"
                         }
                     }
                 ],
@@ -403,8 +292,17 @@ const docTemplate = `{
                     "Admin",
                     "user management"
                 ],
-                "summary": "UNBLOCK USER",
+                "summary": "UnBLOCK USER",
                 "operationId": "unblock user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -430,6 +328,22 @@ const docTemplate = `{
                 ],
                 "summary": "VIEW USER",
                 "operationId": "view-user",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "perpage",
+                        "name": "perpage",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -442,7 +356,12 @@ const docTemplate = `{
         },
         "/admin/viewblockedusers": {
             "get": {
-                "description": "admin can view blocked user here",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieve a list of blocked users with pagination",
                 "consumes": [
                     "application/json"
                 ],
@@ -453,33 +372,19 @@ const docTemplate = `{
                     "Admin",
                     "user management"
                 ],
-                "summary": "VIEW BLOCKED USER",
-                "operationId": "view-blocked user",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
+                "summary": "Get blocked users",
+                "operationId": "blockedusers",
+                "parameters": [
+                    {
+                        "description": "Pagination details",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.BlockedUsersResponse"
+                        }
                     }
-                }
-            }
-        },
-        "/admin/viewcategory": {
-            "get": {
-                "description": "admin can view category",
-                "consumes": [
-                    "application/json"
                 ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "category management"
-                ],
-                "summary": "viewcategory",
-                "operationId": "view-category",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -505,81 +410,22 @@ const docTemplate = `{
                 ],
                 "summary": "VIEW PRODUCT",
                 "operationId": "view-product",
-                "responses": {
-                    "200": {
-                        "description": "OK"
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
                     },
-                    "400": {
-                        "description": "Bad Request"
+                    {
+                        "type": "integer",
+                        "description": "perpage",
+                        "name": "perpage",
+                        "in": "query",
+                        "required": true
                     }
-                }
-            }
-        },
-        "/admin/viewspecificuser": {
-            "get": {
-                "description": "admin can view specific user here",
-                "consumes": [
-                    "application/json"
                 ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "user management"
-                ],
-                "summary": "VIEW SPECIFIC USER",
-                "operationId": "view-specific user",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/viewsubcategory": {
-            "get": {
-                "description": "admin can view subcategory",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "subcategory management"
-                ],
-                "summary": "viewsubcategory",
-                "operationId": "view-subcategory",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/admin/viewunblockedusers": {
-            "get": {
-                "description": "admin can view active user here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin",
-                    "user management"
-                ],
-                "summary": "VIEW ACTIVE USER",
-                "operationId": "view-active user",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -615,158 +461,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/addaddress": {
-            "post": {
-                "description": "user can add their address here ...",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "address management"
-                ],
-                "summary": "Add Address",
-                "operationId": "add_address",
-                "parameters": [
-                    {
-                        "description": "enter address",
-                        "name": "address",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Address"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/addcart": {
-            "post": {
-                "description": "User can add items to their cart",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "cart management"
-                ],
-                "summary": "Add Cart",
-                "operationId": "add-cart",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Product_ID",
-                        "name": "product_id",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Product_Quantity",
-                        "name": "product_quantity",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/addorder": {
-            "post": {
-                "description": "user can add order here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "order management"
-                ],
-                "summary": "ADD ORDER",
-                "operationId": "add-order",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/applycoupen": {
-            "post": {
-                "description": "user can apply coupen here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "coupen"
-                ],
-                "summary": "APPLY COUPEN",
-                "operationId": "applycoupen",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/cancelorder": {
-            "delete": {
-                "description": "user can cancel order here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "order management"
-                ],
-                "summary": "CANCEL ORDER",
-                "operationId": "cancel-order",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
         "/user/changepassword": {
             "post": {
                 "description": "User can change password",
@@ -778,44 +472,10 @@ const docTemplate = `{
                 ],
                 "tags": [
                     "User",
-                    "change password"
+                    "Change password"
                 ],
-                "summary": "changepassword",
+                "summary": "Change password",
                 "operationId": "change-password",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/deleteaddress": {
-            "delete": {
-                "description": "Delete address of a user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "address management"
-                ],
-                "summary": "Delete address",
-                "operationId": "delete-address",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "ID ",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -843,143 +503,20 @@ const docTemplate = `{
                 "operationId": "delete-cart",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "id",
                         "name": "productId",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "quantity",
                         "name": "quantity",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/deleteprofile": {
-            "delete": {
-                "description": "user can delete profile",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "profile management"
-                ],
-                "summary": "DELETE  PROFILE",
-                "operationId": "delete-profile",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/editaddress": {
-            "patch": {
-                "description": "User can change their address here ...",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "address management"
-                ],
-                "summary": "Edit Address",
-                "operationId": "edit-address",
-                "parameters": [
-                    {
-                        "description": "information",
-                        "name": "address",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Address"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/editmyprofile": {
-            "patch": {
-                "description": "user can edit profile",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "profile management"
-                ],
-                "summary": "EDIT  PROFILE",
-                "operationId": "edit-profile",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/listcoupens": {
-            "get": {
-                "description": "user can list coupen here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "coupen"
-                ],
-                "summary": "LIST COUPEN",
-                "operationId": "listcoupen",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/listwishlist": {
-            "get": {
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -992,7 +529,7 @@ const docTemplate = `{
         },
         "/user/loginuser": {
             "post": {
-                "description": "User can login with email and password",
+                "description": "User can login here",
                 "consumes": [
                     "application/json"
                 ],
@@ -1003,163 +540,19 @@ const docTemplate = `{
                     "User",
                     "Home"
                 ],
-                "summary": "User Login",
-                "operationId": "user-login",
+                "summary": "User LOGIN",
+                "operationId": "user-LOGIN",
                 "parameters": [
                     {
-                        "description": "user credentials for logging in",
-                        "name": "user",
+                        "description": "user credentials for creating new account",
+                        "name": "newUser",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/handlers.UserLoginResponse"
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/mywallet": {
-            "get": {
-                "description": "Use can check the amount in wallet",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "my wallet"
-                ],
-                "summary": "My wallet",
-                "operationId": "wallet",
-                "responses": {
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/payment-success": {
-            "post": {
-                "description": "razor pay",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "payment manangement"
-                ],
-                "summary": "RAZOR PAY",
-                "operationId": "razor-pay-success",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/razorpay": {
-            "get": {
-                "description": "razor pay",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "payment manangement"
-                ],
-                "summary": "RAZOR PAY",
-                "operationId": "razor-pay",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/removewishlist": {
-            "delete": {
-                "description": "user can delete items of their wishlist",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "wishlist"
-                ],
-                "summary": "REMOVE WISHLIST",
-                "operationId": "removewishlist",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/returnproduct": {
-            "post": {
-                "description": "user can return product",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "return product"
-                ],
-                "summary": "RETURN PRODUCT",
-                "operationId": "return product",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/showorder": {
-            "get": {
-                "description": "user can view order here",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "order management"
-                ],
-                "summary": "SHOW ORDER",
-                "operationId": "show-order",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -1192,69 +585,10 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/handlers.UserSignupResponse"
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/verifyotp": {
-            "post": {
-                "description": "verify otp",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "change password"
-                ],
-                "summary": "verify otp",
-                "operationId": "verify-otp",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "newpassword",
-                        "name": "verfy",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/user/viewaddress": {
-            "get": {
-                "description": "User can view their address",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User",
-                    "address management"
-                ],
-                "summary": "viewaddress",
-                "operationId": "view-address",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -1282,15 +616,15 @@ const docTemplate = `{
                 "operationId": "view-cart",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "Page number",
+                        "type": "string",
+                        "description": "Page ",
                         "name": "page",
                         "in": "query",
                         "required": true
                     },
                     {
-                        "type": "integer",
-                        "description": "Items per page",
+                        "type": "string",
+                        "description": "perpage",
                         "name": "perpage",
                         "in": "query",
                         "required": true
@@ -1321,6 +655,22 @@ const docTemplate = `{
                 ],
                 "summary": "viewproduct",
                 "operationId": "vieproduct",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "perpage",
+                        "name": "perpage",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -1333,17 +683,84 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "models.Address": {
-            "type": "object"
+        "handlers.AdminLoginResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
         },
-        "models.Admin": {
-            "type": "object"
+        "handlers.BlockedUsersResponse": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "perpage": {
+                    "type": "integer"
+                }
+            }
         },
-        "models.Products": {
-            "type": "object"
+        "handlers.ProductsResponse": {
+            "type": "object",
+            "required": [
+                "product_brand",
+                "product_colour",
+                "product_name",
+                "product_size"
+            ],
+            "properties": {
+                "product_Price": {
+                    "type": "integer"
+                },
+                "product_brand": {
+                    "type": "string"
+                },
+                "product_colour": {
+                    "type": "string"
+                },
+                "product_name": {
+                    "type": "string"
+                },
+                "product_size": {
+                    "type": "integer"
+                },
+                "stock": {
+                    "type": "integer"
+                }
+            }
         },
-        "models.User": {
-            "type": "object"
+        "handlers.UserLoginResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.UserSignupResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone_Number": {
+                    "type": "string"
+                },
+                "user_Name": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`

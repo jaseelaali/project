@@ -1,12 +1,56 @@
 basePath: /
 definitions:
-  models.Address:
+  handlers.AdminLoginResponse:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
     type: object
-  models.Admin:
+  handlers.BlockedUsersResponse:
+    properties:
+      page:
+        type: integer
+      perpage:
+        type: integer
     type: object
-  models.Products:
+  handlers.ProductsResponse:
+    properties:
+      product_Price:
+        type: integer
+      product_brand:
+        type: string
+      product_colour:
+        type: string
+      product_name:
+        type: string
+      product_size:
+        type: integer
+      stock:
+        type: integer
+    required:
+    - product_brand
+    - product_colour
+    - product_name
+    - product_size
     type: object
-  models.User:
+  handlers.UserLoginResponse:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  handlers.UserSignupResponse:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      phone_Number:
+        type: string
+      user_Name:
+        type: string
     type: object
 host: localhost:9080
 info:
@@ -21,35 +65,19 @@ info:
   title: ORCHID_FOOTWARES
   version: "1.0"
 paths:
-  /admin/addcategory:
+  /admin/addproduct:
     post:
       consumes:
       - application/json
-      description: admin can add categories here
-      operationId: add-category
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: add category
-      tags:
-      - Admin
-      - category management
-  /admin/addcoupen:
-    post:
-      consumes:
-      - application/json
-      description: Admin can add coupen here
-      operationId: add-coupen
+      description: Add new products
+      operationId: add-product
       parameters:
-      - description: name of the coupen
-        in: query
-        name: code
+      - description: Product details
+        in: body
+        name: requestBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/handlers.ProductsResponse'
       produces:
       - application/json
       responses:
@@ -57,33 +85,22 @@ paths:
           description: OK
         "400":
           description: Bad Request
-      summary: ADD COUPEN
+      summary: Add Products
       tags:
       - Admin
-      - coupen management
-  /admin/addsubcategory:
-    post:
-      consumes:
-      - application/json
-      description: admin can add subcategories here
-      operationId: add-subcategory
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: add subcategory
-      tags:
-      - Admin
-      - subcategory management
+      - product management
   /admin/block:
     post:
       consumes:
       - application/json
       description: admin can block user here
       operationId: block user
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -95,24 +112,7 @@ paths:
       tags:
       - Admin
       - user management
-  /admin/deletecategory:
-    delete:
-      consumes:
-      - application/json
-      description: admin can delete category
-      operationId: delete-category
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: Delete Category
-      tags:
-      - Admin
-      - category management
-  /admin/deleteproduct:
+  /admin/deleteproducts:
     delete:
       consumes:
       - application/json
@@ -135,53 +135,38 @@ paths:
       tags:
       - Admin
       - product management
-  /admin/deletesubcategory:
-    delete:
-      consumes:
-      - application/json
-      description: admin can delete subcategory
-      operationId: delete-subcategory
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: Delete SubCategory
-      tags:
-      - Admin
-      - subcategory management
-  /admin/editcategory:
-    patch:
-      consumes:
-      - application/json
-      description: admin can edit category
-      operationId: Edit-category
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: Edit Category
-      tags:
-      - Admin
-      - category management
   /admin/editproduct:
     patch:
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-  /admin/editsubcategory:
-    patch:
       consumes:
       - application/json
-      description: admin can edit sub category
-      operationId: Edit-subcategory
+      description: admin can edit product here
+      operationId: edit-product
+      parameters:
+      - description: product_id
+        in: query
+        name: product_id
+        required: true
+        type: integer
+      - description: product name
+        in: query
+        name: product_name
+        type: string
+      - description: product colour
+        in: query
+        name: product_colour
+        type: string
+      - description: product size
+        in: query
+        name: product_size
+        type: integer
+      - description: product price
+        in: query
+        name: product_price
+        type: integer
+      - description: stock
+        in: query
+        name: stock
+        type: integer
       produces:
       - application/json
       responses:
@@ -189,16 +174,33 @@ paths:
           description: OK
         "400":
           description: Bad Request
-      summary: Edit SUb Category
+      summary: EDIT PRODUCT
       tags:
       - Admin
-      - subcategory management
-  /admin/listcoupen:
+      - product management
+  /admin/speacificuser:
     get:
       consumes:
       - application/json
-      description: Admin can list coupen here
-      operationId: list-coupen
+      description: admin can view specific user here
+      operationId: view-specific user
+      parameters:
+      - description: Id
+        in: query
+        name: id
+        type: integer
+      - description: User_Name
+        in: query
+        name: User_Name
+        type: string
+      - description: Email
+        in: query
+        name: Email
+        type: string
+      - description: Phone_Number
+        in: query
+        name: Phone_Number
+        type: string
       produces:
       - application/json
       responses:
@@ -206,44 +208,10 @@ paths:
           description: OK
         "400":
           description: Bad Request
-      summary: LIST COUPEN
+      summary: VIEW SPECIFIC USER
       tags:
       - Admin
-      - coupen management
-  /admin/returnstatus:
-    post:
-      consumes:
-      - application/json
-      description: admin can see delivery status
-      operationId: return status
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: RETURN STATUS
-      tags:
-      - Admin
-      - delivery status
-  /admin/salesreport:
-    get:
-      consumes:
-      - application/json
-      description: Admin can download sales report from here
-      operationId: sales report
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: sales report
-      tags:
-      - Admin
-      - sales report
+      - user management
   /admin/superadminlogin:
     post:
       consumes:
@@ -256,7 +224,7 @@ paths:
         name: login
         required: true
         schema:
-          $ref: '#/definitions/models.Admin'
+          $ref: '#/definitions/handlers.AdminLoginResponse'
       produces:
       - application/json
       responses:
@@ -274,6 +242,12 @@ paths:
       - application/json
       description: admin can unblock user here
       operationId: unblock user
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -281,7 +255,7 @@ paths:
           description: OK
         "400":
           description: Bad Request
-      summary: UNBLOCK USER
+      summary: UnBLOCK USER
       tags:
       - Admin
       - user management
@@ -291,6 +265,17 @@ paths:
       - application/json
       description: admin can view user here
       operationId: view-user
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: perpage
+        in: query
+        name: perpage
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -306,8 +291,15 @@ paths:
     get:
       consumes:
       - application/json
-      description: admin can view blocked user here
-      operationId: view-blocked user
+      description: Retrieve a list of blocked users with pagination
+      operationId: blockedusers
+      parameters:
+      - description: Pagination details
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.BlockedUsersResponse'
       produces:
       - application/json
       responses:
@@ -315,33 +307,29 @@ paths:
           description: OK
         "400":
           description: Bad Request
-      summary: VIEW BLOCKED USER
+      security:
+      - BearerAuth: []
+      summary: Get blocked users
       tags:
       - Admin
       - user management
-  /admin/viewcategory:
-    get:
-      consumes:
-      - application/json
-      description: admin can view category
-      operationId: view-category
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: viewcategory
-      tags:
-      - Admin
-      - category management
   /admin/viewproducts:
     get:
       consumes:
       - application/json
       description: admin can view product here
       operationId: view-product
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: perpage
+        in: query
+        name: perpage
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -353,57 +341,6 @@ paths:
       tags:
       - Admin
       - product management
-  /admin/viewspecificuser:
-    get:
-      consumes:
-      - application/json
-      description: admin can view specific user here
-      operationId: view-specific user
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: VIEW SPECIFIC USER
-      tags:
-      - Admin
-      - user management
-  /admin/viewsubcategory:
-    get:
-      consumes:
-      - application/json
-      description: admin can view subcategory
-      operationId: view-subcategory
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: viewsubcategory
-      tags:
-      - Admin
-      - subcategory management
-  /admin/viewunblockedusers:
-    get:
-      consumes:
-      - application/json
-      description: admin can view active user here
-      operationId: view-active user
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: VIEW ACTIVE USER
-      tags:
-      - Admin
-      - user management
   /user/aboutme:
     get:
       consumes:
@@ -421,109 +358,6 @@ paths:
       tags:
       - User
       - profile management
-  /user/addaddress:
-    post:
-      consumes:
-      - application/json
-      description: user can add their address here ...
-      operationId: add_address
-      parameters:
-      - description: enter address
-        in: body
-        name: address
-        required: true
-        schema:
-          $ref: '#/definitions/models.Address'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: Add Address
-      tags:
-      - User
-      - address management
-  /user/addcart:
-    post:
-      consumes:
-      - application/json
-      description: User can add items to their cart
-      operationId: add-cart
-      parameters:
-      - description: Product_ID
-        in: formData
-        name: product_id
-        required: true
-        type: integer
-      - description: Product_Quantity
-        in: formData
-        name: product_quantity
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: Add Cart
-      tags:
-      - User
-      - cart management
-  /user/addorder:
-    post:
-      consumes:
-      - application/json
-      description: user can add order here
-      operationId: add-order
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: ADD ORDER
-      tags:
-      - User
-      - order management
-  /user/applycoupen:
-    post:
-      consumes:
-      - application/json
-      description: user can apply coupen here
-      operationId: applycoupen
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: APPLY COUPEN
-      tags:
-      - User
-      - coupen
-  /user/cancelorder:
-    delete:
-      consumes:
-      - application/json
-      description: user can cancel order here
-      operationId: cancel-order
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: CANCEL ORDER
-      tags:
-      - User
-      - order management
   /user/changepassword:
     post:
       consumes:
@@ -537,33 +371,10 @@ paths:
           description: OK
         "400":
           description: Bad Request
-      summary: changepassword
+      summary: Change password
       tags:
       - User
-      - change password
-  /user/deleteaddress:
-    delete:
-      consumes:
-      - application/json
-      description: Delete address of a user
-      operationId: delete-address
-      parameters:
-      - description: 'ID '
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: Delete address
-      tags:
-      - User
-      - address management
+      - Change password
   /user/deleteitem:
     delete:
       consumes:
@@ -572,15 +383,15 @@ paths:
       operationId: delete-cart
       parameters:
       - description: id
-        in: formData
+        in: query
         name: productId
         required: true
-        type: integer
+        type: string
       - description: quantity
-        in: formData
+        in: query
         name: quantity
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -592,101 +403,19 @@ paths:
       tags:
       - User
       - cart management
-  /user/deleteprofile:
-    delete:
-      consumes:
-      - application/json
-      description: user can delete profile
-      operationId: delete-profile
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: DELETE  PROFILE
-      tags:
-      - User
-      - profile management
-  /user/editaddress:
-    patch:
-      consumes:
-      - application/json
-      description: User can change their address here ...
-      operationId: edit-address
-      parameters:
-      - description: information
-        in: body
-        name: address
-        required: true
-        schema:
-          $ref: '#/definitions/models.Address'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: Edit Address
-      tags:
-      - User
-      - address management
-  /user/editmyprofile:
-    patch:
-      consumes:
-      - application/json
-      description: user can edit profile
-      operationId: edit-profile
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: EDIT  PROFILE
-      tags:
-      - User
-      - profile management
-  /user/listcoupens:
-    get:
-      consumes:
-      - application/json
-      description: user can list coupen here
-      operationId: listcoupen
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: LIST COUPEN
-      tags:
-      - User
-      - coupen
-  /user/listwishlist:
-    get:
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
   /user/loginuser:
     post:
       consumes:
       - application/json
-      description: User can login with email and password
-      operationId: user-login
+      description: User can login here
+      operationId: user-LOGIN
       parameters:
-      - description: user credentials for logging in
+      - description: user credentials for creating new account
         in: body
-        name: user
+        name: newUser
         required: true
         schema:
-          $ref: '#/definitions/models.User'
+          $ref: '#/definitions/handlers.UserLoginResponse'
       produces:
       - application/json
       responses:
@@ -694,108 +423,10 @@ paths:
           description: OK
         "400":
           description: Bad Request
-      summary: User Login
+      summary: User LOGIN
       tags:
       - User
       - Home
-  /user/mywallet:
-    get:
-      description: Use can check the amount in wallet
-      operationId: wallet
-      produces:
-      - application/json
-      responses:
-        "400":
-          description: Bad Request
-      summary: My wallet
-      tags:
-      - User
-      - my wallet
-  /user/payment-success:
-    post:
-      consumes:
-      - application/json
-      description: razor pay
-      operationId: razor-pay-success
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: RAZOR PAY
-      tags:
-      - User
-      - payment manangement
-  /user/razorpay:
-    get:
-      consumes:
-      - application/json
-      description: razor pay
-      operationId: razor-pay
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: RAZOR PAY
-      tags:
-      - User
-      - payment manangement
-  /user/removewishlist:
-    delete:
-      consumes:
-      - application/json
-      description: user can delete items of their wishlist
-      operationId: removewishlist
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: REMOVE WISHLIST
-      tags:
-      - User
-      - wishlist
-  /user/returnproduct:
-    post:
-      consumes:
-      - application/json
-      description: user can return product
-      operationId: return product
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: RETURN PRODUCT
-      tags:
-      - User
-      - return product
-  /user/showorder:
-    get:
-      consumes:
-      - application/json
-      description: user can view order here
-      operationId: show-order
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: SHOW ORDER
-      tags:
-      - User
-      - order management
   /user/signup:
     post:
       consumes:
@@ -808,7 +439,7 @@ paths:
         name: newUser
         required: true
         schema:
-          $ref: '#/definitions/models.User'
+          $ref: '#/definitions/handlers.UserSignupResponse'
       produces:
       - application/json
       responses:
@@ -820,46 +451,6 @@ paths:
       tags:
       - User
       - Home
-  /user/verifyotp:
-    post:
-      consumes:
-      - application/json
-      description: verify otp
-      operationId: verify-otp
-      parameters:
-      - description: newpassword
-        in: formData
-        name: verfy
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: verify otp
-      tags:
-      - User
-      - change password
-  /user/viewaddress:
-    get:
-      consumes:
-      - application/json
-      description: User can view their address
-      operationId: view-address
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-      summary: viewaddress
-      tags:
-      - User
-      - address management
   /user/viewcart:
     get:
       consumes:
@@ -867,16 +458,16 @@ paths:
       description: User can view their cart
       operationId: view-cart
       parameters:
-      - description: Page number
+      - description: 'Page '
         in: query
         name: page
         required: true
-        type: integer
-      - description: Items per page
+        type: string
+      - description: perpage
         in: query
         name: perpage
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -894,6 +485,17 @@ paths:
       - application/json
       description: user can view product here
       operationId: vieproduct
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: perpage
+        in: query
+        name: perpage
+        required: true
+        type: integer
       produces:
       - application/json
       responses:

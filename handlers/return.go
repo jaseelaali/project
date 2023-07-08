@@ -5,17 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-// RETURN STATUS
-// @Summary RETURN STATUS
-// @ID return status
-// @Description admin can see delivery status
-//@Tags Admin
-//@Tags delivery status
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/returnstatus [post]
+
+
+
 func ReturnStatus(r *gin.Context) {
 	id := r.Query("paymentid")
 	if id == "" {
@@ -35,17 +27,7 @@ func ReturnStatus(r *gin.Context) {
 		"message": "delivery completed",
 	})
 }
-// RETURN PRODUCT
-// @Summary RETURN PRODUCT
-// @ID return product
-// @Description user can return product
-//@Tags User
-//@Tags return product
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /user/returnproduct [post]
+
 func ReturnMyProduct(r *gin.Context) {
 	orderid := r.Query("orderid")
 	if orderid == "" {

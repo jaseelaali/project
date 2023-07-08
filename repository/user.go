@@ -62,7 +62,7 @@ func BlockUser(user_id int) error {
 	}
 	return nil
 }
-func UnBlockUser(user_id int) error {
+func UnBlocUser(user_id int) error {
 	var status string
 	database.DB.Raw("SELECT status FROM users WHERE id=$1;", user_id).Scan(&status)
 	if status == "active" {

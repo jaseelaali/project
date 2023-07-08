@@ -14,6 +14,11 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type AdminLoginResponse struct {
+	Email    string
+	Password string
+}
+
 // AdminLogin
 // @Summary Admin Login
 // @ID Admin-login
@@ -22,7 +27,7 @@ import (
 // @Tags home
 // @Accept json
 // @Produce json
-// @Param login body models.Admin true "Login credentials"
+// @Param login body AdminLoginResponse true "Login credentials"
 // @Success 200
 // @Failure 400
 // @Router /admin/superadminlogin [post]
@@ -78,17 +83,6 @@ func AdminLogin(r *gin.Context) {
 
 }
 
-// sales report
-// @Summary sales report
-// @ID sales report
-// @Description Admin can download sales report from here
-// @Tags Admin
-// @Tags sales report
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /admin/salesreport [get]
 func SalesReport(r *gin.Context) {
 
 	sales, err := repository.SalesReport()

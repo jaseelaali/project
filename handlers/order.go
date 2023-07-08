@@ -9,17 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ADD ORDER
-// @Summary ADD ORDER
-// @ID add-order
-// @Description user can add order here
-// @Tags User
-// @Tags order management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /user/addorder [post]
+
 func AddOrder(r *gin.Context) {
 	user_id := repository.GetId(r)
 	var Address_id int
@@ -57,17 +47,6 @@ func AddOrder(r *gin.Context) {
 	repository.ClearCart(user_id)
 }
 
-// SHOW ORDER
-// @Summary SHOW ORDER
-// @ID show-order
-// @Description user can view order here
-// @Tags User
-// @Tags order management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /user/showorder [get]
 func ShowOrder(r *gin.Context) {
 	page, err := strconv.Atoi(r.Query("page"))
 	perpage, err := strconv.Atoi(r.Query("perpage"))
@@ -97,17 +76,6 @@ func ShowOrder(r *gin.Context) {
 	})
 }
 
-// CANCEL ORDER
-// @Summary CANCEL ORDER
-// @ID cancel-order
-// @Description user can cancel order here
-// @Tags User
-// @Tags order management
-// @Accept json
-// @Produce json
-// @Success 200
-// @Failure 400
-// @Router /user/cancelorder [delete]
 func CancelOrder(r *gin.Context) {
 	user_id := repository.GetId(r)
 	err := repository.Cancel_Order(user_id)
