@@ -19,8 +19,8 @@ func User(r *gin.Engine) {
 		user.POST("/loginuser", handlers.UserLogin)
 		//profile
 		user.GET("/aboutme", middleware.RequiredAuthenticationUser, handlers.Profile)
-		user.PATCH("/editmyprofile", middleware.RequiredAuthenticationUser, handlers.EditProfile) //////
-		user.DELETE("/deleteprofile", middleware.RequiredAuthenticationUser, handlers.DeleteProfile)/////
+		user.PATCH("/editmyprofile", middleware.RequiredAuthenticationUser, handlers.EditProfile)    //////
+		user.DELETE("/deleteprofile", middleware.RequiredAuthenticationUser, handlers.DeleteProfile) /////
 		// cart management
 		user.POST("/addcart", middleware.RequiredAuthenticationUser, handlers.AddCart) ////
 		user.GET("/viewcart", middleware.RequiredAuthenticationUser, handlers.ViewCart)
@@ -29,15 +29,15 @@ func User(r *gin.Engine) {
 		user.GET("/viewproduct", middleware.RequiredAuthenticationUser, handlers.ViewProduct)
 		//change password
 		user.POST("/changepassword", middleware.RequiredAuthenticationUser, handlers.ChangePassword)
-		user.POST("/verifyotp", middleware.RequiredAuthenticationUser, handlers.VerifyOtp)////
+		user.POST("/verifyotp", middleware.RequiredAuthenticationUser, handlers.VerifyOtp) ////
 		// address
-		user.POST("/addaddress", middleware.RequiredAuthenticationUser, handlers.Address)///
-		user.PATCH("/editaddress", middleware.RequiredAuthenticationUser, handlers.EditAddress)//
-		user.DELETE("/deleteaddress", middleware.RequiredAuthenticationUser, handlers.DeleteAddress)///
-		user.GET("/viewaddress", middleware.RequiredAuthenticationUser, handlers.ViewAddress)///
+		user.POST("/addaddress", middleware.RequiredAuthenticationUser, handlers.Address)            ///
+		user.PATCH("/editaddress", middleware.RequiredAuthenticationUser, handlers.EditAddress)      //
+		user.DELETE("/deleteaddress", middleware.RequiredAuthenticationUser, handlers.DeleteAddress) ///
+		user.GET("/viewaddress", middleware.RequiredAuthenticationUser, handlers.ViewAddress)        ///
 		// order management
-		user.POST("/addorder", middleware.RequiredAuthenticationUser, handlers.AddOrder)
-		user.GET("/showorder", middleware.RequiredAuthenticationUser, handlers.ShowOrder)
+		user.POST("/addorder", middleware.RequiredAuthenticationUser, handlers.AddOrder)///entho 
+		user.GET("/showorder", middleware.RequiredAuthenticationUser, handlers.ShowOrder)//ntho
 		user.DELETE("/cancelorder", middleware.RequiredAuthenticationUser, handlers.CancelOrder)
 		//payment
 		user.GET("/razorpay", middleware.RequiredAuthenticationUser, handlers.Razorpay)
@@ -91,10 +91,10 @@ func Admin(r *gin.Engine) {
 		admin.DELETE("/deleteproducts", middleware.RequiredAuthenticationAdmin, handlers.DeleteProducts)
 		admin.GET("/viewproducts", middleware.RequiredAuthenticationAdmin, handlers.ViewProducts)
 		//coupen
-		admin.POST("/addcoupen", middleware.RequiredAuthenticationAdmin, handlers.AddCoupens)
+		admin.POST("/addcoupen", middleware.RequiredAuthenticationAdmin, handlers.AddCoupens) //minamount problem
 		admin.GET("/listcoupen", middleware.RequiredAuthenticationAdmin, handlers.ListCoupen)
 		//delivery complete status change
-		admin.POST("/returnstatus", middleware.RequiredAuthenticationAdmin, handlers.ReturnStatus)
+		admin.POST("/returnstatus", middleware.RequiredAuthenticationAdmin, handlers.ReturnStatus) //"couldn't update the data"
 
 		//sale report
 		admin.GET("/salesreport", middleware.RequiredAuthenticationAdmin, handlers.SalesReport)

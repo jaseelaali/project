@@ -18,7 +18,6 @@ import (
 // @Success 200
 // @Failure 400
 // @Router /user/mywallet [get]
-
 func MyWallet(r *gin.Context) {
 	user_id := repository.GetId(r)
 	data, err := repository.Mywallet(user_id)

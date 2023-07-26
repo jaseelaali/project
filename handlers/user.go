@@ -289,11 +289,6 @@ func UnBlockUser(r *gin.Context) {
 	}
 }
 
-type BlockedUsersResponse struct {
-	Page    int
-	Perpage int
-}
-
 // BlockedUsers
 // @Summary Get blocked users
 // @ID blockedusers
@@ -303,12 +298,17 @@ type BlockedUsersResponse struct {
 // @Tags user management
 // @Accept json
 // @Produce json
-// @Param Body body BlockedUsersResponse{} true "Pagination details"
+// @Param page query integer true "page"
+// @Param perpage query integer true "perpage"
 // @Success 200
 // @Failure 400
 // @Router /admin/viewblockedusers [get]
 func BlockedUsers(r *gin.Context) {
-	Body:=BlockedUsersResponse{}
+	var Body struct {
+		Page    int
+		Perpage int
+	}
+
 	err := r.ShouldBind(&Body)
 	if err != nil {
 		r.JSON(400, gin.H{
@@ -329,6 +329,20 @@ func BlockedUsers(r *gin.Context) {
 
 }
 
+// UNBlockedUsers
+// @Summary Get un blocked users
+// @ID unblockedusers
+// @Description Retrieve a list of active users with pagination
+// @Security BearerAuth
+// @Tags Admin
+// @Tags user management
+// @Accept json
+// @Produce json
+// @Param page query integer true "page"
+// @Param perpage query integer true "perpage"
+// @Success 200
+// @Failure 400
+// @Router /admin/viewunblockedusers [get]
 func ActiveUsers(r *gin.Context) {
 	var Body struct {
 		Page    int `json:"page"`

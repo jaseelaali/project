@@ -1,5 +1,25 @@
 basePath: /
 definitions:
+  handlers.AddAddressResponse:
+    properties:
+      district:
+        type: string
+      house_name:
+        type: string
+      pin_Number:
+        type: integer
+      place:
+        type: string
+      state:
+        type: string
+    type: object
+  handlers.AddResponse:
+    properties:
+      address_id:
+        type: integer
+    required:
+    - address_id
+    type: object
   handlers.AdminLoginResponse:
     properties:
       email:
@@ -7,12 +27,27 @@ definitions:
       password:
         type: string
     type: object
-  handlers.BlockedUsersResponse:
+  handlers.EditAddressResponse:
     properties:
-      page:
+      district:
+        type: string
+      house_name:
+        type: string
+      pin_Number:
         type: integer
-      perpage:
-        type: integer
+      place:
+        type: string
+      state:
+        type: string
+    type: object
+  handlers.EditprofileResponse:
+    properties:
+      email:
+        type: string
+      phone_Number:
+        type: string
+      user_Name:
+        type: string
     type: object
   handlers.ProductsResponse:
     properties:
@@ -65,6 +100,39 @@ info:
   title: ORCHID_FOOTWARES
   version: "1.0"
 paths:
+  /admin/addcoupen:
+    post:
+      consumes:
+      - application/json
+      description: Admin can add coupen here
+      operationId: add-coupen
+      parameters:
+      - description: code
+        in: query
+        name: code
+        required: true
+        type: string
+      - description: minimumamount
+        in: query
+        name: minimumamount
+        required: true
+        type: string
+      - description: amount
+        in: query
+        name: amount
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: ADD COUPEN
+      tags:
+      - Admin
+      - coupen management
   /admin/addproduct:
     post:
       consumes:
@@ -178,6 +246,63 @@ paths:
       tags:
       - Admin
       - product management
+  /admin/listcoupen:
+    get:
+      consumes:
+      - application/json
+      description: Admin can list coupen here
+      operationId: list-coupen
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: LIST COUPEN
+      tags:
+      - Admin
+      - coupen management
+  /admin/returnstatus:
+    post:
+      consumes:
+      - application/json
+      description: admin can see delivery status
+      operationId: return status
+      parameters:
+      - description: paymentid
+        in: query
+        name: paymentid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: ReturnStatus
+      tags:
+      - Admin
+      - delivery status
+  /admin/salesreport:
+    get:
+      consumes:
+      - application/json
+      description: Admin can download sales report from here
+      operationId: sales report
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: sales report
+      tags:
+      - Admin
+      - sales report
   /admin/speacificuser:
     get:
       consumes:
@@ -294,12 +419,16 @@ paths:
       description: Retrieve a list of blocked users with pagination
       operationId: blockedusers
       parameters:
-      - description: Pagination details
-        in: body
-        name: Body
+      - description: page
+        in: query
+        name: page
         required: true
-        schema:
-          $ref: '#/definitions/handlers.BlockedUsersResponse'
+        type: integer
+      - description: perpage
+        in: query
+        name: perpage
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -341,6 +470,36 @@ paths:
       tags:
       - Admin
       - product management
+  /admin/viewunblockedusers:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a list of active users with pagination
+      operationId: unblockedusers
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: perpage
+        in: query
+        name: perpage
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      security:
+      - BearerAuth: []
+      summary: Get un blocked users
+      tags:
+      - Admin
+      - user management
   /user/aboutme:
     get:
       consumes:
@@ -358,6 +517,138 @@ paths:
       tags:
       - User
       - profile management
+  /user/addaddress:
+    post:
+      consumes:
+      - application/json
+      description: User can add their address here...
+      operationId: add-address
+      parameters:
+      - description: Address data
+        in: body
+        name: AddAddressResponse
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.AddAddressResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Add Address
+      tags:
+      - User
+      - address management
+  /user/addcart:
+    post:
+      consumes:
+      - application/json
+      description: User can add items to their cart
+      operationId: add-cart
+      parameters:
+      - description: Product_ID
+        in: query
+        name: product_id
+        required: true
+        type: integer
+      - description: Product_Quantity
+        in: query
+        name: product_quantity
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Add Cart
+      tags:
+      - User
+      - cart management
+  /user/addorder:
+    post:
+      consumes:
+      - application/json
+      description: user can add order here
+      operationId: add-order
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: ADD ORDER
+      tags:
+      - User
+      - order management
+  /user/addwishlist:
+    post:
+      consumes:
+      - application/json
+      description: Adds a product to the user's wishlist based on the provided ID.
+      operationId: addwishlist
+      parameters:
+      - description: ID of the product to add to the wishlist
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Add a product to the wishlist
+      tags:
+      - User
+      - wishlist
+  /user/applycoupens:
+    post:
+      consumes:
+      - application/json
+      description: user can apply coupen here
+      operationId: applycoupen
+      parameters:
+      - description: coupenname
+        in: query
+        name: coupenname
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: APPLY COUPEN
+      tags:
+      - User
+      - coupen
+  /user/cancelorder:
+    delete:
+      consumes:
+      - application/json
+      description: user can cancel order here
+      operationId: cancel-order
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: CANCEL ORDER
+      tags:
+      - User
+      - order management
   /user/changepassword:
     post:
       consumes:
@@ -375,6 +666,28 @@ paths:
       tags:
       - User
       - Change password
+  /user/deleteaddress:
+    delete:
+      description: Delete address of a user
+      operationId: delete-address
+      parameters:
+      - description: 'Idelete addressD '
+        in: body
+        name: AddResponse
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.AddResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Delete address
+      tags:
+      - User
+      - address management
   /user/deleteitem:
     delete:
       consumes:
@@ -403,6 +716,104 @@ paths:
       tags:
       - User
       - cart management
+  /user/deleteprofile:
+    delete:
+      consumes:
+      - application/json
+      description: user can delete profile
+      operationId: delete-profile
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: DELETE  PROFILE
+      tags:
+      - User
+      - profile management
+  /user/editaddress:
+    patch:
+      consumes:
+      - application/json
+      description: User can change their address here ...
+      operationId: edit-address
+      parameters:
+      - description: information
+        in: body
+        name: EditAddressResponse
+        schema:
+          $ref: '#/definitions/handlers.EditAddressResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Edit Address
+      tags:
+      - User
+      - address management
+  /user/editmyprofile:
+    patch:
+      consumes:
+      - application/json
+      description: Edit user profile with the provided data
+      operationId: edit-profile
+      parameters:
+      - description: informations
+        in: body
+        name: EditprofileResponse
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.EditprofileResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Edit user profile
+      tags:
+      - User
+      - profile management
+  /user/listcoupens:
+    get:
+      consumes:
+      - application/json
+      description: user can list coupen here
+      operationId: listcoupen
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: LIST COUPEN
+      tags:
+      - User
+      - coupen
+  /user/listwishlist:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the wishlist for the authenticated user.
+      operationId: list_wishlist
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: Get the user's wishlist
+      tags:
+      - User
+      - wishlist
   /user/loginuser:
     post:
       consumes:
@@ -427,6 +838,147 @@ paths:
       tags:
       - User
       - Home
+  /user/mywallet:
+    get:
+      consumes:
+      - application/json
+      description: user can view wallet
+      operationId: My_Wallet
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: My Wallet
+      tags:
+      - User
+      - My Wallet
+  /user/payment-success:
+    get:
+      consumes:
+      - application/json
+      description: razor pay
+      operationId: razor-pay-success
+      parameters:
+      - description: paymentid
+        in: query
+        name: paymentid
+        required: true
+        type: string
+      - description: orderid
+        in: query
+        name: orderid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: RAZOR PAY
+      tags:
+      - User
+      - payment manangement
+  /user/razorpay:
+    get:
+      consumes:
+      - application/json
+      description: razor pay
+      operationId: razor-pay
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: RAZOR PAY
+      tags:
+      - User
+      - payment manangement
+  /user/removewishlist:
+    delete:
+      consumes:
+      - application/json
+      description: user can delete items of their wishlist
+      operationId: remove_wishlist
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: REMOVE WISHLIST
+      tags:
+      - User
+      - wishlist
+  /user/returnproduct:
+    post:
+      consumes:
+      - application/json
+      description: user can return product
+      operationId: return product
+      parameters:
+      - description: orderid
+        in: query
+        name: orderid
+        required: true
+        type: string
+      - description: productid
+        in: query
+        name: productid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: RETURN PRODUCT
+      tags:
+      - User
+      - return product
+  /user/showorder:
+    get:
+      consumes:
+      - application/json
+      description: user can view order here
+      operationId: show-order
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: perpage
+        in: query
+        name: perpage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: SHOW ORDER
+      tags:
+      - User
+      - order management
   /user/signup:
     post:
       consumes:
@@ -451,6 +1003,23 @@ paths:
       tags:
       - User
       - Home
+  /user/viewaddress:
+    get:
+      consumes:
+      - application/json
+      description: User can view their address
+      operationId: view-address
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: viewaddress
+      tags:
+      - User
+      - address management
   /user/viewcart:
     get:
       consumes:

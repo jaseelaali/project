@@ -32,7 +32,23 @@ func Profile(r *gin.Context) {
 	})
 
 }
-
+type EditprofileResponse struct{
+	User_Name    string
+Email        string
+Phone_Number string
+}
+// EditProfile 
+// @Summary Edit user profile
+// @ID edit-profile
+// @Description Edit user profile with the provided data
+// @Tags User
+// @Tags profile management
+// @Accept json
+// @Produce json
+//@Param EditprofileResponse body EditprofileResponse true "informations"
+// @Success 200 
+// @Failure 400 
+// @Router /user/editmyprofile [patch]
 func EditProfile(r *gin.Context) {
 	user_id := repository.GetId(r)
 	body := models.UserProfile{}
@@ -74,7 +90,6 @@ func EditProfile(r *gin.Context) {
 // @Success 200
 // @Failure 400
 // @Router /user/deleteprofile [delete]
-
 func DeleteProfile(r *gin.Context) {
 	user_id := repository.GetId(r)
 	err := repository.Deleteprofile(user_id)

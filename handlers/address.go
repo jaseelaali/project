@@ -19,6 +19,18 @@ type AddAddressResponse struct {
 	Pin_Number int
 }
 
+// ADDADDRESS
+// @Summary Add Address
+// @ID add-address
+// @Description User can add their address here...
+// @Tags User
+// @Tags address management
+// @Accept json
+// @Produce json
+// @Param AddAddressResponse body AddAddressResponse true "Address data"
+// @Success 200
+// @Failure 400
+// @Router /user/addaddress [post]
 func Address(r *gin.Context) {
 	var Body struct {
 		House_name string
@@ -66,6 +78,18 @@ type EditAddressResponse struct {
 	Pin_Number int
 }
 
+// EDIT ADDRESS
+// @Summary Edit Address
+// @ID edit-address
+// @Description  User can change their address here ...
+// @Tags User
+// @Tags address management
+// @Accept json
+// @Produce json
+// @Param EditAddressResponse body EditAddressResponse false "information"
+// @Success 200
+// @Failure 400
+// @Router /user/editaddress [patch]
 func EditAddress(r *gin.Context) {
 	Id := repository.GetId(r)
 	var body struct {
@@ -134,6 +158,22 @@ func EditAddress(r *gin.Context) {
 
 }
 
+type AddResponse struct {
+	Address_id int `json:"address_id" binding:"required"`
+}
+
+// DeleteAddress
+// @Summary Delete address
+// @ID delete-address
+// @Description Delete address of a user
+// @Tags User
+// @Tags address management
+// @AcceptAddResponse json
+// @Produce json
+// @Param AddResponse body AddResponse true "Idelete addressD "
+// @Success 200
+// @Failure 400
+// @Router /user/deleteaddress [delete]
 func DeleteAddress(r *gin.Context) {
 	User_Id := repository.GetId(r)
 	var Body struct {
@@ -159,7 +199,17 @@ func DeleteAddress(r *gin.Context) {
 
 }
 
-
+// ViewAddress
+// @Summary viewaddress
+// @ID view-address
+// @Description User can view their address
+// @Tags User
+// @Tags address management
+// @Accept json
+// @Produce json
+// @Success 200
+// @Failure 400
+// @Router /user/viewaddress [get]
 func ViewAddress(r *gin.Context) {
 	user_id := repository.GetId(r)
 	address, err := repository.Viewaddress(user_id)

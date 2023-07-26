@@ -7,8 +7,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
-
+// AddWishList
+// @Summary Add a product to the wishlist
+// @ID addwishlist
+// @Description Adds a product to the user's wishlist based on the provided ID.
+// @Tags User
+// @Tags wishlist
+// @Accept json
+// @Produce json
+// @Param id query int true "ID of the product to add to the wishlist"
+// @Success 200
+// @Failure 400
+// @Router /user/addwishlist [post]
 func AddWishList(r *gin.Context) {
 	id, err := strconv.Atoi(r.Query("id"))
 	if err != nil {
@@ -30,7 +40,17 @@ func AddWishList(r *gin.Context) {
 	})
 }
 
-
+// ListWishlist gets the user's wishlist.
+// @Summary Get the user's wishlist
+// @ID list_wishlist
+// @Description Retrieves the wishlist for the authenticated user.
+// @Tags User
+// @Tags wishlist
+// @Accept json
+// @Produce json
+// @Success 200
+// @Failure 400
+// @Router /user/listwishlist [get]
 func ListWishlist(r *gin.Context) {
 	user_id := repository.GetId(r)
 	list, err := repository.ViewWishList(user_id)
@@ -45,7 +65,18 @@ func ListWishlist(r *gin.Context) {
 	})
 }
 
-
+// REMOVE WISHLIST
+// @Summary REMOVE WISHLIST
+// @ID remove_wishlist
+// @Description user can delete items of their wishlist
+// @Tags User
+// @Tags wishlist
+// @Accept json
+// @Produce json
+// @Param id query string true "id"
+// @Success 200
+// @Failure 400
+// @Router /user/removewishlist [delete]
 func RemoveWishlist(r *gin.Context) {
 	id, err := strconv.Atoi(r.Query("id"))
 	if err != nil {

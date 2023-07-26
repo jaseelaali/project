@@ -9,8 +9,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
-
+// ADD COUPEN
+// @Summary ADD COUPEN
+// @ID add-coupen
+// @Description Admin can add coupen here
+// @Tags Admin
+// @Tags coupen management
+// @Accept json
+// @Produce json
+// @Param code query string true "code"
+// @Param minimumamount query string true "minimumamount"
+// @Param amount query string true "amount"
+// @Success 200
+// @Failure 400
+// @Router /admin/addcoupen [post]
 func AddCoupens(r *gin.Context) {
 	code := r.Query("code")
 	if code == "" {
@@ -47,6 +59,17 @@ func AddCoupens(r *gin.Context) {
 	})
 }
 
+// LIST COUPEN
+// @Summary LIST COUPEN
+// @ID list-coupen
+// @Description Admin can list coupen here
+// @Tags Admin
+// @Tags coupen management
+// @Accept json
+// @Produce json
+// @Success 200
+// @Failure 400
+// @Router /admin/listcoupen [get]
 func ListCoupen(r *gin.Context) {
 	coupen, result := repository.Listcoupen()
 	if result != nil {
@@ -60,6 +83,18 @@ func ListCoupen(r *gin.Context) {
 	})
 }
 
+// APPLY COUPEN
+// @Summary APPLY COUPEN
+// @ID applycoupen
+// @Description user can apply coupen here
+// @Tags User
+// @Tags coupen
+// @Accept json
+// @Produce json
+// @Param coupenname query string true "coupenname"
+// @Success 200
+// @Failure 400
+// @Router /user/applycoupens [post]
 func ApplyCoupen(r *gin.Context) {
 	var body struct {
 		Coupenname string `json:"coupenname"`
@@ -87,6 +122,17 @@ func ApplyCoupen(r *gin.Context) {
 
 }
 
+// LIST COUPEN
+// @Summary LIST COUPEN
+// @ID listcoupen
+// @Description user can list coupen here
+// @Tags User
+// @Tags coupen
+// @Accept json
+// @Produce json
+// @Success 200
+// @Failure 400
+// @Router /user/listcoupens [get]
 func Listcoupens(r *gin.Context) {
 	coupen, result := repository.Listcoupen()
 	if result != nil {

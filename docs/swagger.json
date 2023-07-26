@@ -17,6 +17,54 @@
     "host": "localhost:9080",
     "basePath": "/",
     "paths": {
+        "/admin/addcoupen": {
+            "post": {
+                "description": "Admin can add coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "coupen management"
+                ],
+                "summary": "ADD COUPEN",
+                "operationId": "add-coupen",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "minimumamount",
+                        "name": "minimumamount",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "amount",
+                        "name": "amount",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/admin/addproduct": {
             "post": {
                 "description": "Add new products",
@@ -175,6 +223,90 @@
                         "in": "query"
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/listcoupen": {
+            "get": {
+                "description": "Admin can list coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "coupen management"
+                ],
+                "summary": "LIST COUPEN",
+                "operationId": "list-coupen",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/returnstatus": {
+            "post": {
+                "description": "admin can see delivery status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "delivery status"
+                ],
+                "summary": "ReturnStatus",
+                "operationId": "return status",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "paymentid",
+                        "name": "paymentid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/admin/salesreport": {
+            "get": {
+                "description": "Admin can download sales report from here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "sales report"
+                ],
+                "summary": "sales report",
+                "operationId": "sales report",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -369,13 +501,18 @@
                 "operationId": "blockedusers",
                 "parameters": [
                     {
-                        "description": "Pagination details",
-                        "name": "Body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/handlers.BlockedUsersResponse"
-                        }
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "perpage",
+                        "name": "perpage",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -429,6 +566,52 @@
                 }
             }
         },
+        "/admin/viewunblockedusers": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retrieve a list of active users with pagination",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin",
+                    "user management"
+                ],
+                "summary": "Get un blocked users",
+                "operationId": "unblockedusers",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "perpage",
+                        "name": "perpage",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/user/aboutme": {
             "get": {
                 "description": "user can view profile",
@@ -454,6 +637,201 @@
                 }
             }
         },
+        "/user/addaddress": {
+            "post": {
+                "description": "User can add their address here...",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "Add Address",
+                "operationId": "add-address",
+                "parameters": [
+                    {
+                        "description": "Address data",
+                        "name": "AddAddressResponse",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.AddAddressResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/addcart": {
+            "post": {
+                "description": "User can add items to their cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "cart management"
+                ],
+                "summary": "Add Cart",
+                "operationId": "add-cart",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Product_ID",
+                        "name": "product_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Product_Quantity",
+                        "name": "product_quantity",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/addorder": {
+            "post": {
+                "description": "user can add order here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "order management"
+                ],
+                "summary": "ADD ORDER",
+                "operationId": "add-order",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/addwishlist": {
+            "post": {
+                "description": "Adds a product to the user's wishlist based on the provided ID.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "wishlist"
+                ],
+                "summary": "Add a product to the wishlist",
+                "operationId": "addwishlist",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the product to add to the wishlist",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/applycoupens": {
+            "post": {
+                "description": "user can apply coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "coupen"
+                ],
+                "summary": "APPLY COUPEN",
+                "operationId": "applycoupen",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "coupenname",
+                        "name": "coupenname",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/cancelorder": {
+            "delete": {
+                "description": "user can cancel order here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "order management"
+                ],
+                "summary": "CANCEL ORDER",
+                "operationId": "cancel-order",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/user/changepassword": {
             "post": {
                 "description": "User can change password",
@@ -469,6 +847,39 @@
                 ],
                 "summary": "Change password",
                 "operationId": "change-password",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/deleteaddress": {
+            "delete": {
+                "description": "Delete address of a user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "Delete address",
+                "operationId": "delete-address",
+                "parameters": [
+                    {
+                        "description": "Idelete addressD ",
+                        "name": "AddResponse",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.AddResponse"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -520,6 +931,152 @@
                 }
             }
         },
+        "/user/deleteprofile": {
+            "delete": {
+                "description": "user can delete profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "profile management"
+                ],
+                "summary": "DELETE  PROFILE",
+                "operationId": "delete-profile",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/editaddress": {
+            "patch": {
+                "description": "User can change their address here ...",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "Edit Address",
+                "operationId": "edit-address",
+                "parameters": [
+                    {
+                        "description": "information",
+                        "name": "EditAddressResponse",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.EditAddressResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/editmyprofile": {
+            "patch": {
+                "description": "Edit user profile with the provided data",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "profile management"
+                ],
+                "summary": "Edit user profile",
+                "operationId": "edit-profile",
+                "parameters": [
+                    {
+                        "description": "informations",
+                        "name": "EditprofileResponse",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.EditprofileResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/listcoupens": {
+            "get": {
+                "description": "user can list coupen here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "coupen"
+                ],
+                "summary": "LIST COUPEN",
+                "operationId": "listcoupen",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/listwishlist": {
+            "get": {
+                "description": "Retrieves the wishlist for the authenticated user.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "wishlist"
+                ],
+                "summary": "Get the user's wishlist",
+                "operationId": "list_wishlist",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/user/loginuser": {
             "post": {
                 "description": "User can login here",
@@ -544,6 +1101,213 @@
                         "schema": {
                             "$ref": "#/definitions/handlers.UserLoginResponse"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/mywallet": {
+            "get": {
+                "description": "user can view wallet",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "My Wallet"
+                ],
+                "summary": "My Wallet",
+                "operationId": "My_Wallet",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/payment-success": {
+            "get": {
+                "description": "razor pay",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "payment manangement"
+                ],
+                "summary": "RAZOR PAY",
+                "operationId": "razor-pay-success",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "paymentid",
+                        "name": "paymentid",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "orderid",
+                        "name": "orderid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/razorpay": {
+            "get": {
+                "description": "razor pay",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "payment manangement"
+                ],
+                "summary": "RAZOR PAY",
+                "operationId": "razor-pay",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/removewishlist": {
+            "delete": {
+                "description": "user can delete items of their wishlist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "wishlist"
+                ],
+                "summary": "REMOVE WISHLIST",
+                "operationId": "remove_wishlist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/returnproduct": {
+            "post": {
+                "description": "user can return product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "return product"
+                ],
+                "summary": "RETURN PRODUCT",
+                "operationId": "return product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "orderid",
+                        "name": "orderid",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "productid",
+                        "name": "productid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/showorder": {
+            "get": {
+                "description": "user can view order here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "order management"
+                ],
+                "summary": "SHOW ORDER",
+                "operationId": "show-order",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "perpage",
+                        "name": "perpage",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -582,6 +1346,31 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/viewaddress": {
+            "get": {
+                "description": "User can view their address",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "address management"
+                ],
+                "summary": "viewaddress",
+                "operationId": "view-address",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -676,6 +1465,37 @@
         }
     },
     "definitions": {
+        "handlers.AddAddressResponse": {
+            "type": "object",
+            "properties": {
+                "district": {
+                    "type": "string"
+                },
+                "house_name": {
+                    "type": "string"
+                },
+                "pin_Number": {
+                    "type": "integer"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.AddResponse": {
+            "type": "object",
+            "required": [
+                "address_id"
+            ],
+            "properties": {
+                "address_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "handlers.AdminLoginResponse": {
             "type": "object",
             "properties": {
@@ -687,14 +1507,37 @@
                 }
             }
         },
-        "handlers.BlockedUsersResponse": {
+        "handlers.EditAddressResponse": {
             "type": "object",
             "properties": {
-                "page": {
+                "district": {
+                    "type": "string"
+                },
+                "house_name": {
+                    "type": "string"
+                },
+                "pin_Number": {
                     "type": "integer"
                 },
-                "perpage": {
-                    "type": "integer"
+                "place": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.EditprofileResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "phone_Number": {
+                    "type": "string"
+                },
+                "user_Name": {
+                    "type": "string"
                 }
             }
         },

@@ -83,6 +83,17 @@ func AdminLogin(r *gin.Context) {
 
 }
 
+// sales report
+// @Summary sales report
+// @ID sales report
+// @Description Admin can download sales report from here
+// @Tags Admin
+// @Tags sales report
+// @Accept json
+// @Produce json
+// @Success 200
+// @Failure 400
+// @Router /admin/salesreport [get]
 func SalesReport(r *gin.Context) {
 
 	sales, err := repository.SalesReport()

@@ -23,6 +23,17 @@ type Home struct {
 	Contact     string
 }
 
+// RAZOR PAY
+// @Summary RAZOR PAY
+// @ID razor-pay
+// @Description razor pay
+// @Tags User
+// @Tags payment manangement
+// @Accept json
+// @Produce json
+// @Success 200
+// @Failure 400
+// @Router /user/razorpay [get]
 func Razorpay(r *gin.Context) {
 	user_id := repository.GetId(r)
 	//user_id := 4
@@ -85,6 +96,19 @@ func Razorpay(r *gin.Context) {
 
 }
 
+// RAZOR PAY SUCCESS
+// @Summary RAZOR PAY
+// @ID razor-pay-success
+// @Description razor pay
+// @Tags User
+// @Tags payment manangement
+// @Accept json
+// @Produce json
+// @Param paymentid query string true "paymentid"
+// @Param orderid query string true "orderid"
+// @Success 200
+// @Failure 400
+// @Router /user/payment-success [get]
 func Payment_Success(r *gin.Context) {
 	r.HTML(200, "success.html", nil)
 	payment_id := r.Query("paymentid")

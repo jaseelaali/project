@@ -73,14 +73,23 @@ func generateOTP() int {
 	return otp
 }
 
-type VerifyOTPResponse struct {
+type VerifyOtpResponse struct {
 	Otp              int
 	New_Password     string
 	Confirm_Password string
 }
-
-
-
+// VERIFYOTP
+// @Summary VERIFY OTP
+// @ID verify-otp
+// @Description User can verify otp for password change
+// @Tags User
+// @Tags Change password
+// @Accept json
+// @Produce json
+// @Param VerifyOtpResponse body VerifyOtpResponse true "otp"
+// @Success 200
+// @Failure 400
+// @Router /user/verifyotp [post]
 func VerifyOtp(r *gin.Context) {
 	var body struct {
 		Otp              int
