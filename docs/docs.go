@@ -1363,6 +1363,42 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/verifyotp": {
+            "post": {
+                "description": "User can verify otp for password change",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "Change password"
+                ],
+                "summary": "VERIFY OTP",
+                "operationId": "verify--otp",
+                "parameters": [
+                    {
+                        "description": "OTP Verification Request",
+                        "name": "VerifyOtpResponse",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.VerifyOtpResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/user/viewaddress": {
             "get": {
                 "description": "User can view their address",
@@ -1604,6 +1640,20 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "handlers.VerifyOtpResponse": {
+            "type": "object",
+            "properties": {
+                "confirm_Password": {
+                    "type": "string"
+                },
+                "new_Password": {
+                    "type": "string"
+                },
+                "otp": {
+                    "type": "integer"
+                }
+            }
         }
     }
 }`
@@ -1611,7 +1661,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:9080",
+	Host:             "localhost:9090",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "ORCHID_FOOTWARES",

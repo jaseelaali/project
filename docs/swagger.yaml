@@ -87,7 +87,16 @@ definitions:
       user_Name:
         type: string
     type: object
-host: localhost:9080
+  handlers.VerifyOtpResponse:
+    properties:
+      confirm_Password:
+        type: string
+      new_Password:
+        type: string
+      otp:
+        type: integer
+    type: object
+host: localhost:9090
 info:
   contact:
     email: support@swagger.io
@@ -1003,6 +1012,30 @@ paths:
       tags:
       - User
       - Home
+  /user/verifyotp:
+    post:
+      consumes:
+      - application/json
+      description: User can verify otp for password change
+      operationId: verify--otp
+      parameters:
+      - description: OTP Verification Request
+        in: body
+        name: VerifyOtpResponse
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.VerifyOtpResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: VERIFY OTP
+      tags:
+      - User
+      - Change password
   /user/viewaddress:
     get:
       consumes:

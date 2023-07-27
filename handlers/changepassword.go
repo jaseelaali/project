@@ -78,15 +78,15 @@ type VerifyOtpResponse struct {
 	New_Password     string
 	Confirm_Password string
 }
-// VERIFYOTP
+// VERIFY OTP
 // @Summary VERIFY OTP
-// @ID verify-otp
+// @ID verify--otp
 // @Description User can verify otp for password change
 // @Tags User
 // @Tags Change password
 // @Accept json
 // @Produce json
-// @Param VerifyOtpResponse body VerifyOtpResponse true "otp"
+// @Param VerifyOtpResponse body VerifyOtpResponse true "OTP Verification Request"
 // @Success 200
 // @Failure 400
 // @Router /user/verifyotp [post]

@@ -14,7 +14,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:9080",
+    "host": "localhost:9090",
     "basePath": "/",
     "paths": {
         "/admin/addcoupen": {
@@ -1356,6 +1356,42 @@
                 }
             }
         },
+        "/user/verifyotp": {
+            "post": {
+                "description": "User can verify otp for password change",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "Change password"
+                ],
+                "summary": "VERIFY OTP",
+                "operationId": "verify--otp",
+                "parameters": [
+                    {
+                        "description": "OTP Verification Request",
+                        "name": "VerifyOtpResponse",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.VerifyOtpResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/user/viewaddress": {
             "get": {
                 "description": "User can view their address",
@@ -1595,6 +1631,20 @@
                 },
                 "user_Name": {
                     "type": "string"
+                }
+            }
+        },
+        "handlers.VerifyOtpResponse": {
+            "type": "object",
+            "properties": {
+                "confirm_Password": {
+                    "type": "string"
+                },
+                "new_Password": {
+                    "type": "string"
+                },
+                "otp": {
+                    "type": "integer"
                 }
             }
         }
