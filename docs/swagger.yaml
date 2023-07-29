@@ -121,9 +121,9 @@ paths:
         name: code
         required: true
         type: string
-      - description: minimumamount
+      - description: minamount
         in: query
-        name: minimumamount
+        name: minamount
         required: true
         type: string
       - description: amount

@@ -31,10 +31,10 @@ func AddCoupens(r *gin.Context) {
 		})
 		return
 	}
-	minamount, err := strconv.Atoi(r.Query("minamount"))
+	minimumamount, err := strconv.Atoi(r.Query("minimumamount"))
 	if err != nil {
 		r.JSON(400, gin.H{
-			"message": "minimum amount is missing",
+			"message": "minimum amount is **missing",
 		})
 		return
 	}
@@ -47,7 +47,7 @@ func AddCoupens(r *gin.Context) {
 	}
 	var expiry time.Time
 	expiry = time.Now().Add(time.Hour * 24 * 1)
-	err = repository.Addcoupen(code, expiry, minamount, amount)
+	err = repository.Addcoupen(code, expiry, minimumamount, amount)
 	if err != nil {
 		r.JSON(400, gin.H{
 			"error": err.Error(),

@@ -49,8 +49,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "minimumamount",
-                        "name": "minimumamount",
+                        "description": "minamount",
+                        "name": "minamount",
                         "in": "query",
                         "required": true
                     },
