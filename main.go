@@ -29,7 +29,7 @@ func main() {
 	// @license.url https://opensource.org/licenses/MIT
 
 	// @host jaseela.tech
-	// //@host localhost:9090
+	////@host localhost:9090
 	// @BasePath /
 	// @query.collection.format multi
 

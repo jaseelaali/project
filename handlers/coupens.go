@@ -18,7 +18,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param code query string true "code"
-// @Param minimumamount query string true "minimumamount"
+// @Param minamount query string true "minimumamount"
 // @Param amount query string true "amount"
 // @Success 200
 // @Failure 400
