@@ -24,10 +24,12 @@ func main() {
 	// @contact.email support@swagger.io
 
 	// @license.name MIT
+	//// @host localhost:9090
 	// @host jaseela.tech
 	// @license.url https://opensource.org/licenses/MIT
 
 	// @host jaseela.tech
+	// //@host localhost:9090
 	// @BasePath /
 	// @query.collection.format multi
 
@@ -40,5 +42,5 @@ func main() {
 	routes.Admin(Route)
 
 	Route.Run(":9090")
-	
+
 }

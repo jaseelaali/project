@@ -10,6 +10,9 @@ CODE_COVERAGE=code-coverage
 
 all: test build
 
+# run:
+# 	${GOCMD} run main.go
+
 ${BINARY_DIR}:
 	mkdir -p $(BINARY_DIR)
 

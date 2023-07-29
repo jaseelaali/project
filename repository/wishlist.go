@@ -25,22 +25,21 @@ func AddWishlist(user_id, product_id int) error {
 }
 func ViewWishList(user_id int) ([]models.ViewWishList, error) {
 	body := []models.ViewWishList{}
-	result := database.DB.Raw("SELECT * FROM wish_lists WHERE user_id=$1;", user_id).Scan(&body)
+	// result := database.DB.Raw("SELECT * FROM wish_lists WHERE user_id=$1;", user_id).Scan(&body)
+	// if result.Error != nil {
+	// 	return nil, result.Error
+	// }
+	// for i := range body {
+	// 	var name string
+	// 	result = database.DB.Raw("SELECT product_name FROM products WHERE id=$1;", body[i].Product_id).Scan(&name)
+	// 	body[i].Product_Name = name
+	// }
+
+	result := database.DB.Raw(`SELECT w.user_id, w.product_id, p.product_name ,p.product_price FROM wish_lists w
+	INNER JOIN products p ON w.product_id = p.id
+	WHERE w.user_id = $1;`, user_id).Scan(&body)
 	if result.Error != nil {
 		return nil, result.Error
-	}
-	for i := range body {
-		var name string
-		result = database.DB.Raw("SELECT product_name FROM products WHERE id=$1;", body[i].Product_id).Scan(&name)
-		//result = database.DB.Raw("INSERT INTO view_wish_lists(product_name)VALUES($1)WHERE product_id=$2 AND user_id=$3;", name, body[i].Product_id, user_id).Scan(&models.ViewWishList{})
-		result := database.DB.Exec("UPDATE view_wish_lists SET product_name = $1 WHERE product_id = $2 AND user_id = $3", name, body[i].Product_id, user_id)
-		if result.Error != nil {
-			return nil, result.Error
-		}
-		result = database.DB.Raw("SELECT * FROM view_wish_lists WHERE user_id=$1;", user_id).Scan(&body)
-		if result.Error != nil {
-			return nil, result.Error
-		}
 	}
 	return body, nil
 
