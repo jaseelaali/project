@@ -163,7 +163,7 @@ func VerifyOTP(otpCode, expectedCode int) bool {
 // @Param confirmpassword query string true "confirmpassword"
 // @Success 200
 // @Failure 400
-// @Router /user/forget [post]
+// @Router /user/forgot [post]
 func ForgotPassword(r *gin.Context) {
 	email := r.Query("Email")
 	if email == "" {
