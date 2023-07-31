@@ -9,12 +9,11 @@
             "email": "support@swagger.io"
         },
         "license": {
-            "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
         },
         "version": "1.0"
     },
-    "host": "jaseela.tech",
+    "host": "localhost:9090",
     "basePath": "/",
     "paths": {
         "/admin/addcoupen": {
@@ -42,8 +41,8 @@
                     },
                     {
                         "type": "string",
-                        "description": "minamount",
-                        "name": "minamount",
+                        "description": "minimumamount",
+                        "name": "minimumamount",
                         "in": "query",
                         "required": true
                     },
