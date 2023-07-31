@@ -789,7 +789,7 @@ paths:
       tags:
       - User
       - profile management
-  /user/forget:
+  /user/forgot:
     post:
       consumes:
       - application/json

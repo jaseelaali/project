@@ -1034,7 +1034,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/forget": {
+        "/user/forgot": {
             "post": {
                 "description": "User can change password here",
                 "consumes": [
