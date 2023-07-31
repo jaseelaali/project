@@ -14,7 +14,7 @@
         },
         "version": "1.0"
     },
-    "host": "jaseela.tech",
+    "host": "localhost:9090",
     "basePath": "/",
     "paths": {
         "/admin/addcoupen": {
@@ -1015,6 +1015,61 @@
                         "schema": {
                             "$ref": "#/definitions/handlers.EditprofileResponse"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/user/forget": {
+            "post": {
+                "description": "User can change password here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "Forget password"
+                ],
+                "summary": "forgot password",
+                "operationId": "forgot_password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Email",
+                        "name": "Email",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "phone_number",
+                        "name": "Phonenumber",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "newpassword",
+                        "name": "newpassword",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "confirmpassword",
+                        "name": "confirmpassword",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {

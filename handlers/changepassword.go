@@ -78,6 +78,7 @@ type VerifyOtpResponse struct {
 	New_Password     string
 	Confirm_Password string
 }
+
 // VERIFY OTP
 // @Summary VERIFY OTP
 // @ID verify--otp
@@ -146,4 +147,66 @@ func VerifyOTP(otpCode, expectedCode int) bool {
 		return true
 	}
 	return false
+}
+
+// forgotpassword
+// @Summary forgot password
+// @ID forgot_password
+// @Description User can change password here
+// @Tags User
+// @Tags Forget password
+// @Accept json
+// @Produce json
+// @Param Email query string true "Email"
+// @Param Phonenumber query string true "phone_number"
+// @Param newpassword query string true "newpassword"
+// @Param confirmpassword query string true "confirmpassword"
+// @Success 200
+// @Failure 400
+// @Router /user/forget [post]
+func ForgotPassword(r *gin.Context) {
+	email := r.Query("Email")
+	if email == "" {
+		r.JSON(400, gin.H{
+			"message": "email missing",
+		})
+		return
+	}
+	number := r.Query("phonenumber")
+	if number == "" {
+		r.JSON(400, gin.H{
+			"message": "phone number is  missing",
+		})
+		return
+	}
+	newpassword := r.Query("newpassword")
+	if newpassword == "" {
+		r.JSON(400, gin.H{
+			"message": "new password  missing",
+		})
+		return
+	}
+	confirmpasword := r.Query("confirmpassword")
+	if confirmpasword == "" {
+		r.JSON(400, gin.H{
+			"message": "confirm password is   missing",
+		})
+		return
+	}
+	if newpassword != confirmpasword {
+		r.JSON(400, gin.H{
+			"message": "passwords are mismatching,enter properly...",
+		})
+		return
+	}
+	err := repository.Forget(email, number, newpassword)
+	if err != nil {
+		r.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	r.JSON(200, gin.H{
+		"success": "password are changed successfully...",
+	})
 }

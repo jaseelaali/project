@@ -26,10 +26,12 @@ func User(r *gin.Engine) {
 		user.GET("/viewcart", middleware.RequiredAuthenticationUser, handlers.ViewCart)
 		user.DELETE("/deleteitem", middleware.RequiredAuthenticationUser, handlers.DeleteItem)
 		//product
-		user.GET("/viewproduct", middleware.RequiredAuthenticationUser, handlers.ViewProduct)
+		user.GET("/viewproduct",  handlers.ViewProduct)
 		//change password
 		user.POST("/changepassword", middleware.RequiredAuthenticationUser, handlers.ChangePassword)
 		user.POST("/verifyotp", middleware.RequiredAuthenticationUser, handlers.VerifyOtp) ////
+		//forgot password
+		user.POST("/forgot",handlers.ForgotPassword)
 		// address
 		user.POST("/addaddress", middleware.RequiredAuthenticationUser, handlers.Address)            ///
 		user.PATCH("/editaddress", middleware.RequiredAuthenticationUser, handlers.EditAddress)      //

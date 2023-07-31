@@ -1034,6 +1034,61 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/forget": {
+            "post": {
+                "description": "User can change password here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User",
+                    "Forget password"
+                ],
+                "summary": "forgot password",
+                "operationId": "forgot_password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Email",
+                        "name": "Email",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "phone_number",
+                        "name": "Phonenumber",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "newpassword",
+                        "name": "newpassword",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "confirmpassword",
+                        "name": "confirmpassword",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/user/listcoupens": {
             "get": {
                 "description": "user can list coupen here",
@@ -1661,7 +1716,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "jaseela.tech",
+	Host:             "localhost:9090",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "ORCHID_FOOTWARES",

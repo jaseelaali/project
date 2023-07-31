@@ -96,7 +96,7 @@ definitions:
       otp:
         type: integer
     type: object
-host: jaseela.tech
+host: localhost:9090
 info:
   contact:
     email: support@swagger.io
@@ -789,6 +789,44 @@ paths:
       tags:
       - User
       - profile management
+  /user/forget:
+    post:
+      consumes:
+      - application/json
+      description: User can change password here
+      operationId: forgot_password
+      parameters:
+      - description: Email
+        in: query
+        name: Email
+        required: true
+        type: string
+      - description: phone_number
+        in: query
+        name: Phonenumber
+        required: true
+        type: string
+      - description: newpassword
+        in: query
+        name: newpassword
+        required: true
+        type: string
+      - description: confirmpassword
+        in: query
+        name: confirmpassword
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      summary: forgot password
+      tags:
+      - User
+      - Forget password
   /user/listcoupens:
     get:
       consumes:
