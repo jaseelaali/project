@@ -23,13 +23,13 @@ func main() {
 	// @contact.url http://www.swagger.io/support
 	// @contact.email support@swagger.io
 
-	//// @license.name MIT
-	// @host localhost:9090
+	///@license.name MIT
+	//// @host localhost:9090
 	// @host jaseela.tech
 	// @license.url https://opensource.org/licenses/MIT
 
-	////@host jaseela.tech
-	//@host localhost:9090
+	//@host jaseela.tech
+	////@host localhost:9090
 	// @BasePath /
 	// @query.collection.format multi
 
