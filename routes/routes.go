@@ -26,20 +26,20 @@ func User(r *gin.Engine) {
 		user.GET("/viewcart", middleware.RequiredAuthenticationUser, handlers.ViewCart)
 		user.DELETE("/deleteitem", middleware.RequiredAuthenticationUser, handlers.DeleteItem)
 		//product
-		user.GET("/viewproduct",  handlers.ViewProduct)
+		user.GET("/viewproduct", middleware.RequiredAuthenticationUser, handlers.ViewProduct)
 		//change password
 		user.POST("/changepassword", middleware.RequiredAuthenticationUser, handlers.ChangePassword)
 		user.POST("/verifyotp", middleware.RequiredAuthenticationUser, handlers.VerifyOtp) ////
 		//forgot password
-		user.POST("/forgot",handlers.ForgotPassword)
+		user.POST("/forgot", handlers.ForgotPassword)
 		// address
 		user.POST("/addaddress", middleware.RequiredAuthenticationUser, handlers.Address)            ///
 		user.PATCH("/editaddress", middleware.RequiredAuthenticationUser, handlers.EditAddress)      //
 		user.DELETE("/deleteaddress", middleware.RequiredAuthenticationUser, handlers.DeleteAddress) ///
 		user.GET("/viewaddress", middleware.RequiredAuthenticationUser, handlers.ViewAddress)        ///
 		// order management
-		user.POST("/addorder", middleware.RequiredAuthenticationUser, handlers.AddOrder)///entho 
-		user.GET("/showorder", middleware.RequiredAuthenticationUser, handlers.ShowOrder)//ntho
+		user.POST("/addorder", middleware.RequiredAuthenticationUser, handlers.AddOrder)  ///entho
+		user.GET("/showorder", middleware.RequiredAuthenticationUser, handlers.ShowOrder) //ntho
 		user.DELETE("/cancelorder", middleware.RequiredAuthenticationUser, handlers.CancelOrder)
 		//payment
 		user.GET("/razorpay", middleware.RequiredAuthenticationUser, handlers.Razorpay)
