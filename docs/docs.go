@@ -1058,7 +1058,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "phonenumber",
+                        "description": "Phonenumber",
                         "name": "Phonenumber",
                         "in": "query",
                         "required": true

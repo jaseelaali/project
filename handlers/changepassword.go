@@ -158,7 +158,7 @@ func VerifyOTP(otpCode, expectedCode int) bool {
 // @Accept json
 // @Produce json
 // @Param Email query string true "Email"
-// @Param Phonenumber query string true "phonenumber"
+// @Param Phonenumber query string true "Phonenumber"
 // @Param newpassword query string true "newpassword"
 // @Param confirmpassword query string true "confirmpassword"
 // @Success 200
@@ -172,7 +172,7 @@ func ForgotPassword(r *gin.Context) {
 		})
 		return
 	}
-	number := r.Query("phonenumber")
+	number := r.Query("Phonenumber")
 	if number == "" {
 		r.JSON(400, gin.H{
 			"message": "phone number is  missing",
