@@ -13,7 +13,7 @@
         },
         "version": "1.0"
     },
-    "host": "jaseela.tech",
+    "host": "localhost:9090",
     "basePath": "/",
     "paths": {
         "/admin/addcoupen": {
