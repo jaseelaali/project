@@ -158,7 +158,7 @@ func VerifyOTP(otpCode, expectedCode int) bool {
 // @Accept json
 // @Produce json
 // @Param Email query string true "Email"
-// @Param Phonenumber query string true "phone_number"
+// @Param Phonenumber query string true "phonenumber"
 // @Param newpassword query string true "newpassword"
 // @Param confirmpassword query string true "confirmpassword"
 // @Success 200
