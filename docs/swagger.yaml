@@ -800,7 +800,7 @@ paths:
         name: Email
         required: true
         type: string
-      - description: phone_number
+      - description: phonenumber
         in: query
         name: Phonenumber
         required: true
